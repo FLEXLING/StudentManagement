@@ -1,0 +1,3 @@
+C:/Users/HUGE/CLionProjects/StudentManagement/cmake-build-debug/CMakeFiles/StudentManagement.dir
+C:/Users/HUGE/CLionProjects/StudentManagement/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/HUGE/CLionProjects/StudentManagement/cmake-build-debug/CMakeFiles/rebuild_cache.dir
