@@ -1,14 +1,98 @@
 #include<iostream>
 #include<vector>
 #include<conio.h>
+#include <cstring>
+#include <fstream>
+#include<windows.h>
+#include <iomanip>
 
 using namespace std;
 
+//全局文件指针变量
+ifstream collegeFile("college.txt");
+ifstream countryFile("country.txt");
+
+//获取系统时间
+SYSTEMTIME sysTime={0};
+
 bool includeChinese(string);
+int judge(int,int,int);
+int isRun(int);
 /*学号、姓名、性别、国别、出生日期、民族、婚姻状况、政治面貌、身份证号、
   学生类别、入学年月、入学方式、学院、专业、学制、培养层次、年级、班级号、辅导员等*/
-//TODO 导入date类
 
+//Date类开始
+class Date{
+private:
+    int year;
+    int month;
+    int day;
+public:
+    Date(){
+        year=2000;
+        month=1;
+        day=1;
+    }
+
+    Date(int year,int month,int day);
+
+    void setDate(int,int,int);
+    void getDate(int &,int &,int &);
+
+    int getYear() const{
+        return year;
+    }
+
+    int getMonth() const{
+        return month;
+    }
+
+    int getDay() const{
+        return day;
+    }
+
+    void setYear(int year){
+        Date::year=year;
+    }
+
+    void setMonth(int month){
+        Date::month=month;
+    }
+
+    void setDay(int day){
+        Date::day=day;
+    }
+
+};
+
+Date::Date(int year,int month,int day){
+    if(judge(year,month,day)==0){
+        this->year=year;
+        this->month=month;
+        this->day=day;
+    }else{
+        this->year=2000;
+        this->month=1;
+        this->day=1;
+    }
+}
+
+void Date::setDate(int y,int m,int d){
+    if(judge(y,m,d)==0){
+        this->year=y;
+        this->month=m;
+        this->day=d;
+    }
+}
+
+void Date::getDate(int &y,int &m,int &d){
+    y=this->year;
+    m=this->month;
+    d=this->day;
+}
+//Date类结束
+
+//Student类开始
 class Student{
 public:
     const string getName(){
@@ -146,7 +230,7 @@ public:
         Student::counsellor=counsellor;
     }
 
-    const Date getBirthday(){
+    Date getBirthday(){
         return birthday;
     }
 
@@ -154,7 +238,7 @@ public:
         Student::birthday=birthday;
     }
 
-    const Date getEnrollmentDate(){
+    Date getEnrollmentDate(){
         return enrollmentDate;
     }
 
@@ -183,6 +267,50 @@ private:
     string classNum;
     string counsellor;
 };
+//Student类结束
+
+//Date类关联函数
+int judge(int y,int m,int d){
+    int isWrong=0;
+    if(y>0&&m>0&&m<13&&d>0&&d<32){
+        if(m==2){
+            if(!(y%4==0&&y%100!=0||y%400==0)&&d>28){
+                isWrong=1;
+            }else if((y%4==0&&y%100!=0||y%400==0)&&d>29){
+                isWrong;
+            }
+        }else if((m==4||m==6||m==9||m==11)&&d==31){
+            isWrong=1;
+        }
+    }else{
+        isWrong=1;
+    }
+    return isWrong;
+}
+
+int isRun(int year){
+    if(year%400==0||(year%4==0&&year%100!=0)){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+int mouths(int mouth,int year){
+    if(mouth==1||mouth==3||mouth==5||mouth==7||mouth==8||mouth==10||mouth==12){
+        return 31;
+    }else if(mouth==4||mouth==6||mouth==9||mouth==11){
+        return 30;
+    }else{
+        if(isRun(year)){
+            return 29;
+        }else{
+            return 28;
+        }
+    }
+}
+
+
 
 void menu(){
     cout<<" ______________学生信息管理系统_______________ "<<endl;
@@ -222,17 +350,41 @@ void readIn(){
 
     //设置学号
     cout<<"请输入学号："<<endl;
-    int numberRight=1;
+    cin>>number;
+    int numberRight;
     do{
-        if(number.length()!=9){
+        numberRight=1;
+        if(number.length()!=9){//判断学号长度
             numberRight=0;
+        }else{
+            string temp=number.substr(0,1);//判断学院是否正确
+            char buf[100]="0";
+            int is=0;
+            while(!collegeFile.eof()){
+                collegeFile.getline(buf,100);
+                if(temp[0]==buf[0]&&temp[1]==buf[1]){
+                    is=1;
+                    break;
+                }
+            }
+            if(is==0){
+                numberRight=0;
+            }else{
+                //判断入学年份是否为当前年份
+                if((number[2]-48)!=(sysTime.wYear-2000)/10&&(number[3]-48)!=(sysTime.wYear-2000)%10){
+                    numberRight=0;
+                }
+            }
         }
-        //TODO 其余判断逻辑
-        cout<<"输入错误，请重新输入：";
-        cin>>number;
+
+        if(numberRight==0){
+            cout<<"输入学号有误，请重新输入：";
+            cin>>number;
+        }
     }while(numberRight==0);
+
     temp.setCollege(number.substr(0,2));
-    temp.getEnrollmentDate()//TODO 设置入学日期
+    temp.getEnrollmentDate().setYear(sysTime.wYear);
 
     //设置姓名
     cout<<"请输入姓名(2-20个汉字或40个以内字母)：";
@@ -266,9 +418,38 @@ void readIn(){
     temp.setSex(sex);
 
     //设置国别
-    cout<<"请选择国籍："<<endl;
-    temp.setCountry(country);
-    cout<<""<<endl;
+    cout<<"可选择国籍如下："<<endl;
+    char buf[100]="0";
+    int item=0;
+    int countryChoice;
+    while(!countryFile.eof()){
+        countryFile.getline(buf,100);
+        cout<<setw(15)<<buf;
+        item++;
+        if(item%4==0&&item!=0){
+            cout<<endl;
+        }
+    }
+    cout<<"请选择国籍：";
+    cin>>countryChoice;
+    countryFile.seekg(0,ios::beg);
+    int countryNum;
+    while(!countryFile.eof()){
+        countryFile>>countryNum;
+        if(countryChoice==countryNum){
+            countryFile.getline(buf,100);
+            cout<<"已选择："<<countryNum<<" "<<buf<<endl;
+        }else if(countryFile.eof()&&countryChoice!=countryNum){
+            cout<<"输入错误，请重新选择：";
+            cin>>countryChoice;
+            countryFile.seekg(0,ios::beg);
+        }
+    }
+    temp.setCountry(countryChoice);
+
+    //设置出生日期
+    cout<<"请输入出生日期："<<endl;
+    cin>>birthday
     cout<<""<<endl;
 }
 
@@ -307,6 +488,8 @@ bool includeChinese(string str){
     return false;
 }
 int main(){
+    GetLocalTime(&sysTime);
+
     vector<Student> all;
     menu();
     int choice;
