@@ -11,6 +11,8 @@ using namespace std;
 //全局文件指针变量
 ifstream collegeFile("college.txt");
 ifstream countryFile("country.txt");
+ifstream nationFile("nation.txt");
+ifstream politicsStatusFile("politicsStatus.txt");
 
 //获取系统时间
 SYSTEMTIME sysTime={0};
@@ -332,13 +334,13 @@ void readIn(){
     string name;
     int sex;
     int country;
-    int birthday[3];
+    string birthday;
     int nation;
-    int marrige;
+    string marrige;
     int politicsStatus;
     string IDNumber;
     int type;
-    int enrollmentDate[2];
+    string enrollmentDate;
     int entranceWay;
     string college;
     string major;
@@ -349,17 +351,19 @@ void readIn(){
     string counsellor;
 
     //设置学号
-    cout<<"请输入学号："<<endl;
+    cout<<"请输入学号：(必须为9位)";
     cin>>number;
-    int numberRight;
+    int numberRight=1;
     do{
         numberRight=1;
         if(number.length()!=9){//判断学号长度
             numberRight=0;
         }else{
-            string temp=number.substr(0,1);//判断学院是否正确
-            char buf[100]="0";
+            string temp=number.substr(0,2);//判断学院是否正确
+            char buf[100]="\0";
             int is=0;
+            collegeFile.clear();
+            collegeFile.seekg(0,ios::beg);
             while(!collegeFile.eof()){
                 collegeFile.getline(buf,100);
                 if(temp[0]==buf[0]&&temp[1]==buf[1]){
@@ -371,7 +375,7 @@ void readIn(){
                 numberRight=0;
             }else{
                 //判断入学年份是否为当前年份
-                if((number[2]-48)!=(sysTime.wYear-2000)/10&&(number[3]-48)!=(sysTime.wYear-2000)%10){
+                if((number[2]-48)!=(sysTime.wYear-2000)/10||(number[3]-48)!=(sysTime.wYear-2000)%10){
                     numberRight=0;
                 }
             }
@@ -418,44 +422,163 @@ void readIn(){
     temp.setSex(sex);
 
     //设置国别
-    cout<<"可选择国籍如下："<<endl;
-    char buf[100]="0";
+    cout<<"国籍录入，可选择国籍如下："<<endl;
+    char countryBuf[100]="\0";
     int item=0;
-    int countryChoice;
+    string countryChoice;
     while(!countryFile.eof()){
-        countryFile.getline(buf,100);
-        cout<<setw(15)<<buf;
+        countryFile.getline(countryBuf,100);
+        cout<<left<<setw(30)<<countryBuf;
         item++;
         if(item%4==0&&item!=0){
             cout<<endl;
         }
     }
-    cout<<"请选择国籍：";
-    cin>>countryChoice;
-    countryFile.seekg(0,ios::beg);
-    int countryNum;
-    while(!countryFile.eof()){
-        countryFile>>countryNum;
-        if(countryChoice==countryNum){
-            countryFile.getline(buf,100);
-            cout<<"已选择："<<countryNum<<" "<<buf<<endl;
-        }else if(countryFile.eof()&&countryChoice!=countryNum){
-            cout<<"输入错误，请重新选择：";
-            cin>>countryChoice;
-            countryFile.seekg(0,ios::beg);
+    cout<<endl<<"请选择国籍：";
+    cin.get();
+    countryChoice=cin.get();
+    if(countryChoice=="\n"){
+        temp.setCountry(40);
+        cout<<"无有效输入，已将国籍设为默认值：中国"<<endl;
+    }else{
+        countryFile.clear();
+        countryFile.seekg(0,ios::beg);
+        int countryNum;
+        while(!countryFile.eof()){
+            countryFile.getline(countryBuf,100);
+            countryNum=((countryBuf[0]-48)*100+(countryBuf[1]-48)*10+(countryBuf[2]-48));
+            if(atoi(countryChoice.c_str())==countryNum){
+                cout<<"已选择："<<countryBuf<<endl;
+                break;
+            }else if(countryFile.eof()&&atoi(countryChoice.c_str())!=countryNum){
+                cout<<"输入错误，请重新选择：";
+                cin>>countryChoice;
+                countryFile.clear();
+                countryFile.seekg(0,ios::beg);
+            }
         }
+        temp.setCountry(atoi(countryChoice.c_str()));
     }
-    temp.setCountry(countryChoice);
 
     //设置出生日期
     cout<<"请输入出生日期："<<endl;
-    cin>>birthday
-    cout<<""<<endl;
+    cin>>birthday;
+    int birthY=atoi(birthday.substr(0,birthday.find_first_of('.')).c_str());//出生日期分割，并将其转化为int
+    int birthM=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.find_last_of('.')).c_str());
+    int birthD=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.length()).c_str());
+    while(!(judge(birthY,birthM,birthD)&&(sysTime.wYear-birthD)>=10&&(sysTime.wYear-birthD)<=100)){
+        cout<<"出生日期输入错误，请重新输入：";
+        cin>>birthday;
+        birthY=atoi(birthday.substr(0,birthday.find_first_of('.')).c_str());
+        birthM=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.find_last_of('.')).c_str());
+        birthD=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.length()).c_str());
+    }
+    temp.getBirthday().setDate(birthY,birthM,birthD);
+
+    //设置民族
+    cout<<"民族录入，可选择民族如下："<<endl;
+    char nationBuf[100]="\0";
+    item=0;
+    string nationChoice;
+    while(!nationFile.eof()){
+        nationFile.getline(nationBuf,100);
+        cout<<left<<setw(30)<<nationBuf;
+        item++;
+        if(item%4==0&&item!=0){
+            cout<<endl;
+        }
+    }
+    cout<<endl<<"请选择民族：";
+    cin.get();
+    nationChoice=cin.get();
+    if(nationChoice=="\n"){
+        temp.setNation(1);
+        cout<<"无有效输入，已将民族设为默认值：汉族"<<endl;
+    }else{
+        nationFile.clear();
+        nationFile.seekg(0,ios::beg);
+        int nationNum;
+        while(!nationFile.eof()){
+            nationFile.getline(nationBuf,100);
+            nationNum=((nationBuf[0]-48)*10+(nationBuf[1]-48));
+            if(atoi(nationChoice.c_str())==nationNum){
+                cout<<"已选择："<<nationBuf<<endl;
+                break;
+            }else if(nationFile.eof()&&atoi(nationChoice.c_str())!=nationNum){
+                cout<<"输入错误，请重新选择：";
+                cin>>nationChoice;
+                nationFile.clear();
+                nationFile.seekg(0,ios::beg);
+            }
+        }
+        temp.setNation(atoi(nationChoice.c_str()));
+    }
+
+    //设置婚姻状况
+    cout<<"请选择婚姻状况："<<endl<<"1.未婚   2。已婚    3.丧偶    4.离婚    9.其他"<<endl;
+    cin.get();
+    marrige=cin.get();
+    if(marrige!="\n"){
+        int int_marrige=atoi(marrige.c_str());
+        while(int_marrige!=1&&int_marrige!=2&&int_marrige!=3&&int_marrige!=4&&int_marrige!=9){
+            cout<<"输入错误，请重新输入：";
+            cin>>marrige;
+            int_marrige=atoi(marrige.c_str());
+        }
+        temp.setMarrige(int_marrige);
+    }else{
+        temp.setMarrige(1);
+        cout<<"无有效输入，已将婚姻状况设为默认值：未婚"<<endl;
+    }
+
+    //设置政治面貌
+    cout<<"政治面貌，可选择政治面貌如下："<<endl;
+    char politicsStatusBuf[100]="\0";
+    item=0;
+    string politicsStatusChoice;
+    while(!politicsStatusFile.eof()){
+        politicsStatusFile.getline(politicsStatusBuf,100);
+        cout<<left<<setw(30)<<politicsStatusBuf;
+        item++;
+        if(item%4==0&&item!=0){
+            cout<<endl;
+        }
+    }
+    cout<<endl<<"请选择政治面貌：";
+    cin.get();
+    politicsStatusChoice=cin.get();
+    if(politicsStatusChoice=="\n"){
+        temp.setPoliticsStatus(1);
+        cout<<"无有效输入，已将政治面貌设为默认值：共青团员"<<endl;
+    }else{
+        politicsStatusFile.clear();
+        politicsStatusFile.seekg(0,ios::beg);
+        int politicsStatusNum;
+        while(!politicsStatusFile.eof()){
+            politicsStatusFile.getline(politicsStatusBuf,100);
+            politicsStatusNum=((politicsStatusBuf[0]-48)*10+(politicsStatusBuf[1]-48));
+            if(atoi(politicsStatusChoice.c_str())==politicsStatusNum){
+                cout<<"已选择："<<politicsStatusBuf<<endl;
+                break;
+            }else if(politicsStatusFile.eof()&&atoi(politicsStatusChoice.c_str())!=politicsStatusNum){
+                cout<<"输入错误，请重新选择：";
+                cin>>politicsStatusChoice;
+                politicsStatusFile.clear();
+                politicsStatusFile.seekg(0,ios::beg);
+            }
+        }
+        temp.setPoliticsStatus(atoi(politicsStatusChoice.c_str()));
+    }
+
+
+
+
 }
 
 Student search(){
     //TODO
-    return ;
+    Student temp;
+    return temp;
 }
 
 void change(){
@@ -494,7 +617,7 @@ int main(){
     menu();
     int choice;
     choice=getch();
-    choice=toupper(choice);
+    choice-=48;
     cout<<choice<<endl;
     switch(choice){
         case 1:

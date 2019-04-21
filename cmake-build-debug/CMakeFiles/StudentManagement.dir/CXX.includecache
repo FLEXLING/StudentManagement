@@ -11,4 +11,14 @@ iostream
 -
 vector
 -
+conio.h
+-
+cstring
+-
+fstream
+-
+windows.h
+-
+iomanip
+-
 
