@@ -1,4 +1,4 @@
-set(CMAKE_CXX_COMPILER "D:/Dev-Cpp/MinGW64/bin/g++.exe")
+set(CMAKE_CXX_COMPILER "C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/g++.exe")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_COMPILER_VERSION "4.9.2")
@@ -18,11 +18,11 @@ set(CMAKE_CXX_SIMULATE_VERSION "")
 
 
 
-set(CMAKE_AR "D:/Dev-Cpp/MinGW64/bin/ar.exe")
-set(CMAKE_CXX_COMPILER_AR "D:/Dev-Cpp/MinGW64/bin/gcc-ar.exe")
-set(CMAKE_RANLIB "D:/Dev-Cpp/MinGW64/bin/ranlib.exe")
-set(CMAKE_CXX_COMPILER_RANLIB "D:/Dev-Cpp/MinGW64/bin/gcc-ranlib.exe")
-set(CMAKE_LINKER "D:/Dev-Cpp/MinGW64/bin/ld.exe")
+set(CMAKE_AR "C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/ar.exe")
+set(CMAKE_CXX_COMPILER_AR "C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/gcc-ar.exe")
+set(CMAKE_RANLIB "C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/ranlib.exe")
+set(CMAKE_CXX_COMPILER_RANLIB "C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/gcc-ranlib.exe")
+set(CMAKE_LINKER "C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/ld.exe")
 set(CMAKE_COMPILER_IS_GNUCXX 1)
 set(CMAKE_CXX_COMPILER_LOADED 1)
 set(CMAKE_CXX_COMPILER_WORKS TRUE)
@@ -72,5 +72,5 @@ endif()
 
 
 set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "stdc++;mingw32;gcc;moldname;mingwex;pthread;advapi32;shell32;user32;kernel32;mingw32;gcc;moldname;mingwex")
-set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2;D:/Dev-Cpp/MinGW64/lib/gcc;D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib;D:/Dev-Cpp/MinGW64/lib")
+set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2;C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc;C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib;C:/Program Files (x86)/Dev-Cpp/MinGW64/lib")
 set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")
