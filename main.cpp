@@ -339,7 +339,7 @@ void readIn(){
     Student temp;
     string number;
     string name;
-    string sex;
+    int sex;
     string country;
     string birthday;
     string nation;
@@ -600,99 +600,111 @@ void readIn(){
                 politicsStatusFile.seekg(0,ios::beg);
             }
         }
-        temp.setPoliticsStatus();
+        temp.setPoliticsStatus(politicsStatusBuf.substr(politicsStatusBuf.find_last_of(' '),politicsStatusBuf.length()));
     }
     cout<<"政治面貌录入成功！"<<endl<<endl<<endl;
 
 
     //设置身份证号
-    if(temp.getCountry()!=40){
+    if(temp.getCountry()!="中国"){
         cout<<"国籍信息为非中国，身份证号设为空"<<endl;
         temp.setIdNumber("0");
     }else{
-        int isIdNumberRight=1;
-        cout<<"请输入身份证号：";
-        cin>>IDNumber;
+        while(1){
+            int isIdNumberRight=1;
+            cout<<"请输入身份证号：";
+            cin>>IDNumber;
 
-        //判断身份证号长度
-        if(IDNumber.length()!=18){
-            cout<<"身份证号长度错误，请重新输入身份证号："<<endl;
-            isIdNumberRight=0;
-        }
+            //判断身份证号长度
+            if(IDNumber.length()!=18){
+                cout<<"身份证号长度错误，请重新输入身份证号："<<endl;
+                isIdNumberRight=0;
+            }
 
-        //判断行政区划
-        if(isIdNumberRight==1){
-            char adminDivisionBuf[100]="\0";
-            int adminDivisionNum;
-            while(!adminDivisionFile.eof()){
-                adminDivisionFile.getline(adminDivisionBuf,100);
-                adminDivisionNum=((adminDivisionBuf[0]-48)*100000+(adminDivisionBuf[1]-48)*10000+
-                                  (adminDivisionBuf[2]-48)*1000
-                                  +(adminDivisionBuf[1]-48)*100+(adminDivisionBuf[4]-48)*10+(adminDivisionBuf[5]-48));
-                if(atoi(IDNumber.substr(0,6).c_str())==adminDivisionNum){
-                    isIdNumberRight=1;
-                    break;
-                }else if(adminDivisionFile.eof()&&atoi(IDNumber.substr(0,6).c_str())!=adminDivisionNum){
-                    cout<<"行政区划错误，请重新输入身份证号：";
-                    isIdNumberRight=0;
-                    adminDivisionFile.clear();
-                    adminDivisionFile.seekg(0,ios::beg);
+            //判断行政区划
+            if(isIdNumberRight==1){
+                char adminDivisionBuf[100]="\0";
+                int adminDivisionNum;
+                while(!adminDivisionFile.eof()){
+                    adminDivisionFile.getline(adminDivisionBuf,100);
+                    adminDivisionNum=((adminDivisionBuf[0]-48)*100000+(adminDivisionBuf[1]-48)*10000+
+                                      (adminDivisionBuf[2]-48)*1000
+                                      +(adminDivisionBuf[1]-48)*100+(adminDivisionBuf[4]-48)*10+(adminDivisionBuf[5]-48));
+                    if(atoi(IDNumber.substr(0,6).c_str())==adminDivisionNum){
+                        isIdNumberRight=1;
+                        break;
+                    }else if(adminDivisionFile.eof()&&atoi(IDNumber.substr(0,6).c_str())!=adminDivisionNum){
+                        cout<<"行政区划错误，请重新输入身份证号：";
+                        isIdNumberRight=0;
+                        adminDivisionFile.clear();
+                        adminDivisionFile.seekg(0,ios::beg);
+                    }
                 }
             }
-        }
 
-        //判断出生日期
-        if(isIdNumberRight==1){
-            int IdbirthY=atoi(IDNumber.substr(6,10).c_str());//提取身份证出生日期，并将其转化为int
-            int IdbirthM=atoi(IDNumber.substr(10,12).c_str());
-            int IdbirthD=atoi(IDNumber.substr(12,14).c_str());
-            if(IdbirthY!=temp.getBirthday().getYear()||IdbirthM!=temp.getBirthday().getMonth()
-               ||IdbirthD!=temp.getBirthday().getDay()){
-                isIdNumberRight=0;
-                cout<<"出生日期错误，请重新输入身份证号：";
+            //判断出生日期
+            if(isIdNumberRight==1){
+                int IdbirthY=atoi(IDNumber.substr(6,10).c_str());//提取身份证出生日期，并将其转化为int
+                int IdbirthM=atoi(IDNumber.substr(10,12).c_str());
+                int IdbirthD=atoi(IDNumber.substr(12,14).c_str());
+                if(IdbirthY!=temp.getBirthday().getYear()||IdbirthM!=temp.getBirthday().getMonth()
+                   ||IdbirthD!=temp.getBirthday().getDay()){
+                    isIdNumberRight=0;
+                    cout<<"出生日期错误，请重新输入身份证号：";
+                }
             }
-        }
 
-        //判断顺序码
-        if(isIdNumberRight==1){
-            int sequenceNum=atoi(IDNumber.substr().c_str());
-            if((sequenceNum%2)==0&&temp.getSex()==2){
-                isIdNumberRight=1;
-            }else if((sequenceNum%2)==temp.getSex()){
-                isIdNumberRight=1;
+            //判断顺序码
+            int intSex;
+            if(temp.getSex()=="男"){
+                intSex=1;
+            }else if(temp.getSex()=="女"){
+                intSex=0;
+            }
+            if(isIdNumberRight==1){
+                int sequenceNum=atoi(IDNumber.substr().c_str());
+                if((sequenceNum%2)==intSex){
+                    isIdNumberRight=1;
+                }else{
+                    isIdNumberRight=0;
+                    cout<<"性别错误，请重新输入身份证号：";
+                }
+            }
+
+            //判断校验位
+            if(isIdNumberRight==1){
+                char check[11]={'1','0','X','9','8','7','6','5','4','3','2'};
+                int sumNum=(IDNumber[0]-48)*7+(IDNumber[1]-48)*9+(IDNumber[2]-48)*10+(IDNumber[3]-48)*5+
+                           (IDNumber[4]-48)*8+(IDNumber[5]-48)*4+(IDNumber[6]-48)*2+(IDNumber[7]-48)*1+
+                           (IDNumber[8]-48)*6+(IDNumber[9]-48)*3+(IDNumber[10]-48)*7+(IDNumber[11]-48)*9+
+                           (IDNumber[12]-48)*10+(IDNumber[13]-48)*5+(IDNumber[14]-48)*8+(IDNumber[15]-48)*4+
+                           (IDNumber[16]-48)*2;
+                char checkNum=check[sumNum%11];
+                if(checkNum!=IDNumber[17]){
+                    isIdNumberRight=0;
+                    cout<<"检验位错误，请重新输入身份证号：";
+                }
+            }
+            if(isIdNumberRight==1){
+                temp.setIdNumber(IDNumber);
+                cout<<"身份证号录入成功！"<<endl<<endl<<endl;
+                break;
             }else{
-                isIdNumberRight=0;
-                cout<<"性别错误，请重新输入身份证号：";
-            }
-        }
-
-        //判断校验位
-        if(isIdNumberRight==1){
-            char check[11]={'1','0','X','9','8','7','6','5','4','3','2'};
-            int sumNum=(IDNumber[0]-48)*7+(IDNumber[1]-48)*9+(IDNumber[2]-48)*10+(IDNumber[3]-48)*5+
-                       (IDNumber[4]-48)*8+(IDNumber[5]-48)*4+(IDNumber[6]-48)*2+(IDNumber[7]-48)*1+
-                       (IDNumber[8]-48)*6+(IDNumber[9]-48)*3+(IDNumber[10]-48)*7+(IDNumber[11]-48)*9+
-                       (IDNumber[12]-48)*10+(IDNumber[13]-48)*5+(IDNumber[14]-48)*8+(IDNumber[15]-48)*4+
-                       (IDNumber[16]-48)*2;
-            char checkNum=check[sumNum%11];
-            if(checkNum!=IDNumber[17]){
-                isIdNumberRight=0;
-                cout<<"检验位错误，请重新输入身份证号：";
+                cin>>IDNumber;
             }
         }
 
         //TODO 判断是否重复身份证号
     }
-    cout<<"身份证号录入成功！"<<endl<<endl<<endl;
 
 
     //设置学生类别
     cout<<"设置学生类别，可选择类别如下："<<endl;
-    char typeBuf[100]="\0";
+    string typeBuf;
     item=0;
     string typeChoice;
     while(!typeFile.eof()){
-        typeFile.getline(typeBuf,100);
+        getline(typeFile,typeBuf);
         cout<<left<<setw(15)<<typeBuf;
         item++;
         if(item%4==0&&item!=0){
@@ -710,7 +722,7 @@ void readIn(){
         typeFile.seekg(0,ios::beg);
         int typeNum;
         while(!typeFile.eof()){
-            typeFile.getline(typeBuf,100);
+            getline(typeFile,typeBuf);
             typeNum=(typeBuf[0]-48);
             if(atoi(typeChoice.c_str())==typeNum){
                 cout<<"已选择："<<typeBuf<<endl;
@@ -722,7 +734,7 @@ void readIn(){
                 typeFile.seekg(0,ios::beg);
             }
         }
-        temp.setType(atoi(typeChoice.c_str()));
+        temp.setType(typeBuf.substr(typeBuf.find_last_of(' '),typeBuf.length()));
     }
     cout<<"学生类别录入成功！"<<endl<<endl<<endl;
 
@@ -744,11 +756,11 @@ void readIn(){
 
     //设置入学方式
     cout<<"设置入学方式，可选择方式如下："<<endl;
-    char entranceWayBuf[100]="\0";
+    string entranceWayBuf;
     item=0;
     string entranceWayChoice;
     while(!entranceWayFile.eof()){
-        entranceWayFile.getline(entranceWayBuf,100);
+        getline(entranceWayFile,entranceWayBuf);
         cout<<left<<setw(15)<<entranceWayBuf;
         item++;
         if(item%4==0&&item!=0){
@@ -759,14 +771,14 @@ void readIn(){
     cin.get();
     entranceWayChoice=cin.get();
     if(entranceWayChoice=="\n"){
-        temp.setEntranceWay(1);
+        temp.setEntranceWay("普通入学");
         cout<<"无有效输入，已将入学方式设为默认值：普通入学"<<endl;
     }else{
         entranceWayFile.clear();
         entranceWayFile.seekg(0,ios::beg);
         int entranceWayNum;
         while(!entranceWayFile.eof()){
-            entranceWayFile.getline(entranceWayBuf,100);
+            getline(entranceWayFile,entranceWayBuf);
             entranceWayNum=(entranceWayBuf[0]-48);
             if(atoi(entranceWayChoice.c_str())==entranceWayNum){
                 cout<<"已选择："<<entranceWayBuf<<endl;
@@ -778,7 +790,7 @@ void readIn(){
                 entranceWayFile.seekg(0,ios::beg);
             }
         }
-        temp.setEntranceWay(atoi(entranceWayChoice.c_str()));
+        temp.setEntranceWay(entranceWayBuf.substr(entranceWayBuf.find_last_of(' '),entranceWayBuf.length()));
     }
     cout<<"入学方式录入成功！"<<endl<<endl<<endl;
 
@@ -786,13 +798,13 @@ void readIn(){
     //设置学院与专业名称
     cout<<"设置专业，你的学院为："<</*TODO 当前学院*/endl;
     cout<<"可选择专业如下："<<endl;
-    char majorWayBuf[100]="\0";
+    string majorWayBuf;
     item=0;
     string majorCollege;
     int majorChoice;
     entranceWayFile>>majorCollege;
-    while(atoi(majorCollege.substr(0,2).c_str())==temp.getCollege()){
-        entranceWayFile.getline(entranceWayBuf,100);
+    while(majorCollege.substr(0,2)==temp.getCollege()){
+        getline(entranceWayFile,entranceWayBuf);
         cout<<entranceWayBuf<<endl;
     }
     cout<<endl<<"请选择：";
@@ -801,7 +813,7 @@ void readIn(){
     entranceWayFile.seekg(0,ios::beg);
     int majorNum;
         while(!entranceWayFile.eof()){
-            entranceWayFile.getline(entranceWayBuf,100);
+            getline(entranceWayFile,entranceWayBuf);
             majorNum=(entranceWayBuf[0]-48);
             if(atoi(entranceWayChoice.c_str())==majorNum){
                 cout<<"已选择："<<entranceWayBuf<<endl;
@@ -813,8 +825,8 @@ void readIn(){
                 entranceWayFile.seekg(0,ios::beg);
             }
         }
-        temp.setEntranceWay(atoi(entranceWayChoice.c_str()));
-    cout<<"入学方式录入成功！"<<endl<<endl<<endl;
+        temp.setEntranceWay(entranceWayBuf.substr(entranceWayBuf.find_last_of(' '),entranceWayBuf.length()));
+    cout<<"专业录入成功！"<<endl<<endl<<endl;
 
 
 
@@ -846,6 +858,7 @@ void readIn(){
     }
 
     //设置培养层次
+
 
     //设置班级号
 
