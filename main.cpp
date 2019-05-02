@@ -1,10 +1,11 @@
 #include<iostream>
 #include<vector>
 #include<conio.h>
-#include <cstring>
-#include <fstream>
+#include<string>
+#include<fstream>
 #include<windows.h>
-#include <iomanip>
+#include<iomanip>
+#include<fstream>
 
 using namespace std;
 
@@ -17,11 +18,13 @@ ifstream adminDivisionFile("administrativeDivision.txt");
 ifstream typeFile("type.txt");
 ifstream entranceWayFile("entranceWay.txt");
 ifstream majorFile("major.txt");
+ifstream counsellorFile("counsellor.txt");
 
 //获取系统时间
 SYSTEMTIME sysTime={0};
 
 bool includeChinese(string);
+void splitString(string,vector<string> &,string);
 
 int judge(int,int,int);
 
@@ -75,7 +78,7 @@ public:
 };
 
 Date::Date(int year,int month,int day){
-    if(judge(year,month,day)==0){
+    if(judge(year,month,day)==1){
         this->year=year;
         this->month=month;
         this->day=day;
@@ -87,7 +90,7 @@ Date::Date(int year,int month,int day){
 }
 
 void Date::setDate(int y,int m,int d){
-    if(judge(y,m,d)==0){
+    if(judge(y,m,d)==1){
         this->year=y;
         this->month=m;
         this->day=d;
@@ -104,7 +107,7 @@ void Date::getDate(int &y,int &m,int &d){
 //Student类开始
 class Student{
 public:
-    const string getNumber(){
+    string getNumber(){
         return number;
     }
 
@@ -112,7 +115,7 @@ public:
         Student::number=number;
     }
 
-    const string getName(){
+    string getName(){
         return name;
     }
 
@@ -120,7 +123,7 @@ public:
         Student::name=name;
     }
 
-    const string getSex(){
+    string getSex(){
         return sex;
     }
 
@@ -128,7 +131,7 @@ public:
         Student::sex=sex;
     }
 
-    const string getCountry(){
+    string getCountry(){
         return country;
     }
 
@@ -136,7 +139,7 @@ public:
         Student::country=country;
     }
 
-    Date getBirthday(){
+    Date &getBirthday(){
         return birthday;
     }
 
@@ -144,7 +147,7 @@ public:
         Student::birthday=birthday;
     }
 
-    const string getNation(){
+    string getNation(){
         return nation;
     }
 
@@ -152,7 +155,7 @@ public:
         Student::nation=nation;
     }
 
-    const string getMarrige(){
+    string getMarrige(){
         return marrige;
     }
 
@@ -160,7 +163,7 @@ public:
         Student::marrige=marrige;
     }
 
-    const string getPoliticsStatus(){
+    string getPoliticsStatus(){
         return politicsStatus;
     }
 
@@ -168,7 +171,7 @@ public:
         Student::politicsStatus=politicsStatus;
     }
 
-    const string getIdNumber(){
+    string getIdNumber(){
         return IDNumber;
     }
 
@@ -176,7 +179,7 @@ public:
         IDNumber=idNumber;
     }
 
-    const string getType(){
+    string getType(){
         return type;
     }
 
@@ -184,7 +187,7 @@ public:
         Student::type=type;
     }
 
-    Date getEnrollmentDate(){
+    Date &getEnrollmentDate(){
         return enrollmentDate;
     }
 
@@ -192,7 +195,7 @@ public:
         Student::enrollmentDate=enrollmentDate;
     }
 
-    const string getEntranceWay(){
+    string getEntranceWay(){
         return entranceWay;
     }
 
@@ -200,7 +203,7 @@ public:
         Student::entranceWay=entranceWay;
     }
 
-    const string getCollege(){
+    string getCollege(){
         return college;
     }
 
@@ -208,7 +211,7 @@ public:
         Student::college=college;
     }
 
-    const string getMajor(){
+    string getMajor(){
         return major;
     }
 
@@ -224,7 +227,7 @@ public:
         Student::schoolLength=schoolLength;
     }
 
-    const string getTrainingLevel(){
+    string getTrainingLevel(){
         return trainingLevel;
     }
 
@@ -248,7 +251,7 @@ public:
         Student::classNum=classNum;
     }
 
-    const string getCounsellor(){
+    string getCounsellor(){
         return counsellor;
     }
 
@@ -281,21 +284,21 @@ private:
 
 //Date类关联函数
 int judge(int y,int m,int d){
-    int isWrong=0;
+    int isRight=1;
     if(y>0&&m>0&&m<13&&d>0&&d<32){
         if(m==2){
             if(!(y%4==0&&y%100!=0||y%400==0)&&d>28){
-                isWrong=1;
+                isRight=0;
             }else if((y%4==0&&y%100!=0||y%400==0)&&d>29){
-                isWrong;
+                isRight=0;
             }
         }else if((m==4||m==6||m==9||m==11)&&d==31){
-            isWrong=1;
+            isRight=0;
         }
     }else{
-        isWrong=1;
+        isRight=0;
     }
-    return isWrong;
+    return isRight;
 }
 
 int isRun(int year){
@@ -333,31 +336,13 @@ void menu(){
     cout<<"|  7.输出学生信息                             |"<<endl;
     cout<<"|  8.退出                                     |"<<endl;
     cout<<"|_____________________________________________|"<<endl;
+    cout<<"请选择：";
 }
 
-void readIn(){
-    Student temp;
-    string number;
-    string name;
-    int sex;
-    string country;
-    string birthday;
-    string nation;
-    string marrige;
-    string politicsStatus;
-    string IDNumber;
-    string type;
-    string enrollmentDate;
-    string college;
-    string major;
-    int schoolLength;
-    string trainingLevel;
-    int grade;
-    string classNum;
-    string counsellor;
-
+void setNumber(Student &temp){
     //设置学号
-    cout<<"请输入学号：(必须为9位)";
+    string number;
+    cout<<"请输入学号(必须为9位)：";
     cin>>number;
     int numberRight=1;
     do{
@@ -394,34 +379,57 @@ void readIn(){
         }
     }while(numberRight==0);
     temp.getEnrollmentDate().setYear(sysTime.wYear);
+    temp.setNumber(number);
     cout<<"学号录入成功！"<<endl<<endl<<endl;
+}
 
-
+void setName(Student &temp){
     //设置姓名
+    string name;
     cout<<"请输入姓名(2-20个汉字或40个以内字母)：";
     cin>>name;
-    bool nameRight=0;
-    while(nameRight==false){
+    bool nameRight=1;
+    while(1){
         if(includeChinese(name)){
-            if(name.length()>=4&&name.length()<=40){
-                temp.setName(name);
-                nameRight=true;
+            for(int i=0;i<name.length();i++){
+                if(isalpha(name[i])||ispunct(name[i])||isdigit(name[i])){
+                    cout<<"姓名中不能同时含有中文和其他字符！"<<endl;
+                    nameRight=false;
+                    break;
+                }
+            }
+            if(name.length()<4||name.length()>40){
+                nameRight=false;
+                cout<<"姓名长度错误！"<<endl;
             }
         }else{
-            if(name.length()>0&&name.length()<=40){
-                temp.setName(name);//TODO 检验“abc”等名称
-                nameRight=true;
+            for(int i=0;i<name.length();i++){
+                if(!isalpha(name[i])){
+                    nameRight=false;
+                    cout<<"姓名中不能含有除中文和字母的其他字符！"<<endl;
+                    break;
+                }
+            }
+            if(name.length()<=0||name.length()>40){
+                nameRight=false;
+                cout<<"姓名长度错误！"<<endl;
             }
         }
         if(nameRight==false){
-            cout<<"输入错误，请重新输入：";
+            cout<<"请重新输入：";
             cin>>name;
+            nameRight=true;
+        }else{
+            temp.setName(name);
+            break;
         }
     }
     cout<<"姓名录入成功！"<<endl<<endl<<endl;
+}
 
-
+void setSex(Student &temp){
     //设置性别
+    int sex;
     cout<<"请选择性别(男/女)："<<endl<<"1.男   2.女"<<endl;
     cin>>sex;
     while(sex<1||sex>2){
@@ -434,8 +442,9 @@ void readIn(){
         temp.setSex("女");
     }
     cout<<"性别录入成功！"<<endl<<endl<<endl;
+}
 
-
+void setCountry(Student &temp){
     //设置国别
     cout<<"国籍录入，可选择国籍如下："<<endl;
     string countryBuf;
@@ -450,9 +459,10 @@ void readIn(){
         }
     }
     cout<<endl<<"请选择国籍：";
-    cin.get();
-    countryChoice=cin.get();
-    if(countryChoice=="\n"){
+    cin.clear();
+    cin.sync();
+    getline(cin,countryChoice);
+    if(countryChoice.size()==0){
         temp.setCountry("中国");
         cout<<"无有效输入，已将国籍设为默认值：中国"<<endl;
     }else{
@@ -475,15 +485,17 @@ void readIn(){
         }
     }
     cout<<"国籍录入成功！"<<endl<<endl<<endl;
+}
 
-
+void setBirthday(Student &temp){
     //设置出生日期
-    cout<<"请输入出生日期："<<endl;
+    string birthday;
+    cout<<"请输入出生日期：";
     cin>>birthday;
     int birthY=atoi(birthday.substr(0,birthday.find_first_of('.')).c_str());//出生日期分割，并将其转化为int
     int birthM=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.find_last_of('.')).c_str());
-    int birthD=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.length()).c_str());
-    while(!(judge(birthY,birthM,birthD)&&(sysTime.wYear-birthD)>=10&&(sysTime.wYear-birthD)<=100)){
+    int birthD=atoi(birthday.substr(birthday.find_last_of('.')+1,birthday.length()).c_str());
+    while(!(judge(birthY,birthM,birthD)&&(sysTime.wYear-birthY)>=10&&(sysTime.wYear-birthY)<=100)){
         cout<<"出生日期输入错误，请重新输入：";
         cin>>birthday;
         birthY=atoi(birthday.substr(0,birthday.find_first_of('.')).c_str());
@@ -492,9 +504,11 @@ void readIn(){
     }
     temp.getBirthday().setDate(birthY,birthM,birthD);
     cout<<"出生日期录入成功！"<<endl<<endl<<endl;
+}
 
-
+void setNation(Student &temp){
     //设置民族
+    int item;
     cout<<"民族录入，可选择民族如下："<<endl;
     string nationBuf;
     item=0;
@@ -508,9 +522,10 @@ void readIn(){
         }
     }
     cout<<endl<<"请选择民族：";
-    cin.get();
-    nationChoice=cin.get();
-    if(nationChoice=="\n"){
+    cin.clear();
+    cin.sync();
+    getline(cin,nationChoice);
+    if(nationChoice.size()==0){
         temp.setNation("汉族");
         cout<<"无有效输入，已将民族设为默认值：汉族"<<endl;
     }else{
@@ -519,10 +534,10 @@ void readIn(){
         int nationNum;
         while(!nationFile.eof()){
             getline(nationFile,nationBuf);
-            nationNum=((nationBuf[0]-48)*10+(nationBuf[1]-48));
+            nationNum=atoi(nationBuf.substr(0,nationBuf.find_first_of('\t')).c_str());
             if(atoi(nationChoice.c_str())==nationNum){
                 cout<<"已选择："<<nationBuf<<endl;
-                temp.setNation(nationBuf.substr(nationBuf.find_last_of(' '),nationBuf.length()));
+                temp.setNation(nationBuf.substr(nationBuf.find_last_of('\t'),nationBuf.length()));
                 break;
             }else if(nationFile.eof()&&atoi(nationChoice.c_str())!=nationNum){
                 cout<<"输入错误，请重新选择：";
@@ -533,13 +548,16 @@ void readIn(){
         }
     }
     cout<<"民族录入成功！"<<endl<<endl<<endl;
+}
 
-
+void setMarrige(Student &temp){
+    string marrige;
     //设置婚姻状况
     cout<<"请选择婚姻状况："<<endl<<"1.未婚   2。已婚    3.丧偶    4.离婚    9.其他"<<endl;
-    cin.get();
-    marrige=cin.get();
-    if(marrige!="\n"){
+    cin.clear();
+    cin.sync();
+    getline(cin,marrige);
+    if(marrige.size()!=0){
         int int_marrige=atoi(marrige.c_str());
         while(int_marrige!=1&&int_marrige!=2&&int_marrige!=3&&int_marrige!=4&&int_marrige!=9){
             cout<<"输入错误，请重新输入：";
@@ -548,26 +566,32 @@ void readIn(){
         }
         if(int_marrige==1){
             temp.setMarrige("未婚");
+            cout<<"已选择：未婚"<<endl;
         }else if(int_marrige==2){
             temp.setMarrige("已婚");
+            cout<<"已选择：已婚"<<endl;
         }else if(int_marrige==3){
             temp.setMarrige("丧偶");
+            cout<<"已选择：丧偶"<<endl;
         }else if(int_marrige==4){
             temp.setMarrige("离婚");
+            cout<<"已选择：离婚"<<endl;
         }else if(int_marrige==9){
             temp.setMarrige("其他");
+            cout<<"已选择：其他"<<endl;
         }
     }else{
         temp.setMarrige("未婚");
         cout<<"无有效输入，已将婚姻状况设为默认值：未婚"<<endl;
     }
     cout<<"婚姻状况录入成功！"<<endl<<endl<<endl;
+}
 
-
+void setPoliticStatus(Student &temp){
     //设置政治面貌
     cout<<"政治面貌，可选择政治面貌如下："<<endl;
     string politicsStatusBuf;
-    item=0;
+    int item=0;
     string politicsStatusChoice;
     while(!politicsStatusFile.eof()){
         getline(politicsStatusFile,politicsStatusBuf);
@@ -578,9 +602,10 @@ void readIn(){
         }
     }
     cout<<endl<<"请选择政治面貌：";
-    cin.get();
-    politicsStatusChoice=cin.get();
-    if(politicsStatusChoice=="\n"){
+    cin.clear();
+    cin.sync();
+    getline(cin,politicsStatusChoice);
+    if(politicsStatusChoice.size()==0){
         temp.setPoliticsStatus("共青团员");
         cout<<"无有效输入，已将政治面貌设为默认值：共青团员"<<endl;
     }else{
@@ -600,41 +625,47 @@ void readIn(){
                 politicsStatusFile.seekg(0,ios::beg);
             }
         }
-        temp.setPoliticsStatus(politicsStatusBuf.substr(politicsStatusBuf.find_last_of(' '),politicsStatusBuf.length()));
+        temp.setPoliticsStatus(
+                politicsStatusBuf.substr(politicsStatusBuf.find_last_of(' '),politicsStatusBuf.length()));
     }
     cout<<"政治面貌录入成功！"<<endl<<endl<<endl;
+}
 
-
+void setIDNumber(Student &temp){
     //设置身份证号
+    string IDNumber;
     if(temp.getCountry()!="中国"){
-        cout<<"国籍信息为非中国，身份证号设为空"<<endl;
+        cout<<"国籍信息为非中国，身份证号设为空！"<<endl<<endl<<endl;
         temp.setIdNumber("0");
     }else{
         while(1){
             int isIdNumberRight=1;
             cout<<"请输入身份证号：";
+            cin.clear();
+            cin.sync();
             cin>>IDNumber;
 
             //判断身份证号长度
             if(IDNumber.length()!=18){
-                cout<<"身份证号长度错误，请重新输入身份证号："<<endl;
+                cout<<"身份证号长度错误，";
                 isIdNumberRight=0;
             }
 
             //判断行政区划
             if(isIdNumberRight==1){
-                char adminDivisionBuf[100]="\0";
+                string adminDivisionBuf;
                 int adminDivisionNum;
                 while(!adminDivisionFile.eof()){
-                    adminDivisionFile.getline(adminDivisionBuf,100);
-                    adminDivisionNum=((adminDivisionBuf[0]-48)*100000+(adminDivisionBuf[1]-48)*10000+
-                                      (adminDivisionBuf[2]-48)*1000
-                                      +(adminDivisionBuf[1]-48)*100+(adminDivisionBuf[4]-48)*10+(adminDivisionBuf[5]-48));
+                    getline(adminDivisionFile,adminDivisionBuf);
+                    adminDivisionNum=atoi(adminDivisionBuf.substr(0,6).c_str());
+                    int debug=atoi(IDNumber.substr(0,6).c_str());
                     if(atoi(IDNumber.substr(0,6).c_str())==adminDivisionNum){
                         isIdNumberRight=1;
+                        adminDivisionFile.clear();
+                        adminDivisionFile.seekg(0,ios::beg);
                         break;
                     }else if(adminDivisionFile.eof()&&atoi(IDNumber.substr(0,6).c_str())!=adminDivisionNum){
-                        cout<<"行政区划错误，请重新输入身份证号：";
+                        cout<<"行政区划错误，";
                         isIdNumberRight=0;
                         adminDivisionFile.clear();
                         adminDivisionFile.seekg(0,ios::beg);
@@ -644,13 +675,13 @@ void readIn(){
 
             //判断出生日期
             if(isIdNumberRight==1){
-                int IdbirthY=atoi(IDNumber.substr(6,10).c_str());//提取身份证出生日期，并将其转化为int
-                int IdbirthM=atoi(IDNumber.substr(10,12).c_str());
-                int IdbirthD=atoi(IDNumber.substr(12,14).c_str());
+                int IdbirthY=atoi(IDNumber.substr(6,4).c_str());//提取身份证出生日期，并将其转化为int
+                int IdbirthM=atoi(IDNumber.substr(10,2).c_str());
+                int IdbirthD=atoi(IDNumber.substr(12,2).c_str());
                 if(IdbirthY!=temp.getBirthday().getYear()||IdbirthM!=temp.getBirthday().getMonth()
                    ||IdbirthD!=temp.getBirthday().getDay()){
                     isIdNumberRight=0;
-                    cout<<"出生日期错误，请重新输入身份证号：";
+                    cout<<"出生日期错误，";
                 }
             }
 
@@ -662,12 +693,12 @@ void readIn(){
                 intSex=0;
             }
             if(isIdNumberRight==1){
-                int sequenceNum=atoi(IDNumber.substr().c_str());
+                int sequenceNum=atoi(IDNumber.substr(14,3).c_str());
                 if((sequenceNum%2)==intSex){
                     isIdNumberRight=1;
                 }else{
                     isIdNumberRight=0;
-                    cout<<"性别错误，请重新输入身份证号：";
+                    cout<<"性别错误，";
                 }
             }
 
@@ -682,26 +713,25 @@ void readIn(){
                 char checkNum=check[sumNum%11];
                 if(checkNum!=IDNumber[17]){
                     isIdNumberRight=0;
-                    cout<<"检验位错误，请重新输入身份证号：";
+                    cout<<"检验位错误，";
                 }
             }
             if(isIdNumberRight==1){
                 temp.setIdNumber(IDNumber);
                 cout<<"身份证号录入成功！"<<endl<<endl<<endl;
                 break;
-            }else{
-                cin>>IDNumber;
             }
         }
 
         //TODO 判断是否重复身份证号
     }
+}
 
-
+void setType(Student &temp){
     //设置学生类别
     cout<<"设置学生类别，可选择类别如下："<<endl;
     string typeBuf;
-    item=0;
+    int item=0;
     string typeChoice;
     while(!typeFile.eof()){
         getline(typeFile,typeBuf);
@@ -712,10 +742,11 @@ void readIn(){
         }
     }
     cout<<endl<<"请选择学生类别：";
-    cin.get();
-    typeChoice=cin.get();
-    if(typeChoice=="\n"){
-        temp.setType(1);
+    cin.clear();
+    cin.sync();
+    getline(cin,typeChoice);
+    if(typeChoice.size()==0){
+        temp.setType("无");
         cout<<"无有效输入，已将学生类别设为默认值：无"<<endl;
     }else{
         typeFile.clear();
@@ -737,27 +768,34 @@ void readIn(){
         temp.setType(typeBuf.substr(typeBuf.find_last_of(' '),typeBuf.length()));
     }
     cout<<"学生类别录入成功！"<<endl<<endl<<endl;
+}
 
+void setEnrollmentDate(Student &temp){
     //设置入学年月
-    cout<<"请输入入学日期："<<endl;
+    string enrollmentDate;
+    cout<<"请输入入学日期：";
     cin>>enrollmentDate;
     int enrollY=atoi(enrollmentDate.substr(0,enrollmentDate.find_first_of('.')).c_str());//出生日期分割，并将其转化为int
-    int enrollM=atoi(enrollmentDate.substr(enrollmentDate.find_first_of('.')+1,enrollmentDate.find_last_of('.')).c_str());
+    int enrollM=atoi(
+            enrollmentDate.substr(enrollmentDate.find_first_of('.')+1,enrollmentDate.find_last_of('.')).c_str());
     int enrollD=atoi(enrollmentDate.substr(enrollmentDate.find_first_of('.')+1,enrollmentDate.length()).c_str());
     while(!(judge(enrollY,enrollM,enrollD)&&enrollM>=8&&enrollM<=10)){
         cout<<"入学日期输入错误，请重新输入：";
         cin>>enrollmentDate;
         enrollY=atoi(enrollmentDate.substr(0,enrollmentDate.find_first_of('.')).c_str());
-        enrollM=atoi(enrollmentDate.substr(enrollmentDate.find_first_of('.')+1,enrollmentDate.find_last_of('.')).c_str());
+        enrollM=atoi(
+                enrollmentDate.substr(enrollmentDate.find_first_of('.')+1,enrollmentDate.find_last_of('.')).c_str());
         enrollD=atoi(enrollmentDate.substr(enrollmentDate.find_first_of('.')+1,enrollmentDate.length()).c_str());
     }
     temp.getEnrollmentDate().setDate(enrollY,enrollM,enrollD);
     cout<<"入学日期录入成功！"<<endl<<endl<<endl;
+}
 
+void setEntranceWay(Student &temp){
     //设置入学方式
     cout<<"设置入学方式，可选择方式如下："<<endl;
     string entranceWayBuf;
-    item=0;
+    int item=0;
     string entranceWayChoice;
     while(!entranceWayFile.eof()){
         getline(entranceWayFile,entranceWayBuf);
@@ -768,9 +806,10 @@ void readIn(){
         }
     }
     cout<<endl<<"请选择入学方式：";
-    cin.get();
-    entranceWayChoice=cin.get();
-    if(entranceWayChoice=="\n"){
+    cin.clear();
+    cin.sync();
+    getline(cin,entranceWayChoice);
+    if(entranceWayChoice.size()==0){
         temp.setEntranceWay("普通入学");
         cout<<"无有效输入，已将入学方式设为默认值：普通入学"<<endl;
     }else{
@@ -793,83 +832,138 @@ void readIn(){
         temp.setEntranceWay(entranceWayBuf.substr(entranceWayBuf.find_last_of(' '),entranceWayBuf.length()));
     }
     cout<<"入学方式录入成功！"<<endl<<endl<<endl;
+}
 
-
-    //设置学院与专业名称
-    cout<<"设置专业，你的学院为："<</*TODO 当前学院*/endl;
+void setMajor(Student &temp){
+    //设置专业名称
+    cout<<"设置专业，你的学院为："<<temp.getCollege()<<endl;
     cout<<"可选择专业如下："<<endl;
-    string majorWayBuf;
-    item=0;
+    string majorBuf;
     string majorCollege;
     int majorChoice;
-    entranceWayFile>>majorCollege;
-    while(majorCollege.substr(0,2)==temp.getCollege()){
-        getline(entranceWayFile,entranceWayBuf);
-        cout<<entranceWayBuf<<endl;
+    majorFile.clear();
+    majorFile.seekg(0,ios::beg);
+    while(!majorFile.eof()){
+        getline(majorFile,majorCollege);
+        if(majorCollege.substr(2,majorCollege.find_first_of(' ')-2)==temp.getCollege()){
+            cout<<majorCollege.substr(majorCollege.find_first_of(' ')+1,majorCollege.length());
+        }
     }
+
     cout<<endl<<"请选择：";
     cin>>majorChoice;
-    entranceWayFile.clear();
-    entranceWayFile.seekg(0,ios::beg);
-    int majorNum;
-        while(!entranceWayFile.eof()){
-            getline(entranceWayFile,entranceWayBuf);
-            majorNum=(entranceWayBuf[0]-48);
-            if(atoi(entranceWayChoice.c_str())==majorNum){
-                cout<<"已选择："<<entranceWayBuf<<endl;
-                break;
-            }else if(entranceWayFile.eof()&&atoi(entranceWayChoice.c_str())!=majorNum){
-                cout<<"输入错误，请重新选择：";
-                cin>>entranceWayChoice;
-                entranceWayFile.clear();
-                entranceWayFile.seekg(0,ios::beg);
-            }
+    majorFile.clear();
+    majorFile.seekg(0,ios::beg);
+    string majorNum;
+    vector<string> majors;
+    while(!majorFile.eof()){
+        getline(majorFile,majorBuf);
+        if(majorBuf.substr(2,majorBuf.find_first_of(' ')-2)==temp.getCollege()){
+            majorBuf=majorBuf.substr(majorBuf.find_first_of(' ')+1,majorBuf.length());
+            splitString(majorBuf,majors," ");
         }
-        temp.setEntranceWay(entranceWayBuf.substr(entranceWayBuf.find_last_of(' '),entranceWayBuf.length()));
+    }
+    int i=0;
+    while(1){
+        majorNum=majors[i];
+        if(majorChoice==atoi(majorNum.substr(0,2).c_str())){
+            cout<<"已选择："<<majorNum<<endl;
+            goto here;
+        }else if(i==majors.size()-1&&majorChoice!=atoi(majorNum.substr(0,1).c_str())){
+            cout<<"输入错误，请重新选择：";
+            cin>>majorChoice;
+            i=-1;
+        }
+        i++;
+    }
+    here:temp.setMajor(majorNum.substr(2,majorNum.length()));
     cout<<"专业录入成功！"<<endl<<endl<<endl;
+}
 
-
-
+void setGrade(Student &temp){
     //设置年级
-    cout<<"设置年级，请输入所在年级";
+    int grade;
+    cout<<"设置年级，请输入所在年级：";
     cin>>grade;
-    if(grade!=2000+atoi(number.substr(2,4).c_str())){
+    int numberYear=atoi(temp.getNumber().substr(2,2).c_str());
+    if(grade!=2000+atoi(temp.getNumber().substr(2,2).c_str())){
         int tempChoice;
         cout<<"输入年级与学号中年级不同，是否确定录入：1.是      2.否"<<endl;
         cin>>tempChoice;
         if(tempChoice==1){
             temp.setGrade(grade);
         }else{
-            temp.setGrade(2000+atoi(number.substr(2,4).c_str()));
+            temp.setGrade(2000+atoi(temp.getNumber().substr(2,2).c_str()));
+            cout<<"已选择录入学号中年份!"<<endl;
         }
     }else{
-        temp.setGrade(2000+atoi(number.substr(2,4).c_str()));
+        temp.setGrade(2000+atoi(temp.getNumber().substr(2,2).c_str()));
     }
     cout<<"年级录入成功！"<<endl<<endl<<endl;
+}
 
+void setSchoolLength(Student &temp){
     //设置学制
-    if(atoi(number.substr(0,2).c_str())==15){
+    if(atoi(temp.getNumber().substr(0,2).c_str())==15){
         temp.setSchoolLength(5);
-
-    }else if(atoi(number.substr(0,2).c_str())==29){
+    }else if(atoi(temp.getNumber().substr(0,2).c_str())==29){
         temp.setSchoolLength(3);
     }else{
         temp.setSchoolLength(4);
     }
+}
 
+void setTrainingLevel(Student &temp){
     //设置培养层次
+    if(temp.getMajor()=="研究生专业"){
+        temp.setTrainingLevel("研究生");
+        cout<<endl<<"专业为研究生专业\n录入培养层次：研究生"<<endl<<endl<<endl;
+    }else{
+        temp.setTrainingLevel("本科生");
+        cout<<endl<<"专业为本科专业\n录入培养层次：本科生"<<endl<<endl<<endl;
+    }
+}
 
-
+void setClass(Student &temp){
     //设置班级号
+    string classNum;
+    cout<<"设置班级号，请输入所在班级：";
+    cin>>classNum;
+    int intClassNum=atoi(classNum.c_str());
+    while(intClassNum<0||intClassNum>10){
+        cout<<"班级号输入错误，请重新输入:";
+        cin>>classNum;
+        intClassNum=atoi(classNum.c_str());
+    }
+    temp.setClassNum(intClassNum);
+    cout<<"班级为："<<intClassNum<<"班，班级录入成功！"<<endl<<endl<<endl;
+}
 
+void setCounsellor(Student &temp){
     //设置辅导员
-
-
-
-
-
-
-
+    cout<<"录入辅导员："<<endl;
+    string major=temp.getMajor();
+    string counsellorBuf;
+    string counsellor;
+    int exist=0;
+    while(!counsellorFile.eof()){
+        getline(counsellorFile,counsellorBuf);
+        if(counsellorBuf.substr(0,counsellorBuf.find_first_of(' '))==major){
+            counsellor=counsellorBuf.substr(counsellorBuf.find_last_of(' '),counsellorBuf.length());
+            temp.setCounsellor(counsellor);
+            exist=1;
+            cout<<"你的专业为："<<major<<endl<<"对应辅导员为："<<counsellor<<endl;
+            break;
+        }
+    }
+    if(exist==0){
+        cin>>counsellor;
+        ofstream inCounsellorFile("counsellor.txt");
+        inCounsellorFile<<major<<' '<<counsellor<<endl;
+        temp.setCounsellor(counsellor);
+        inCounsellorFile.close();
+    }
+    cout<<"辅导员录入成功"<<endl<<endl<<endl;
 }
 
 Student search(){
@@ -894,7 +988,24 @@ void sort(){
 
 }
 
+void print(){
+
+}
+
 /*------------------Student成员函数结束----------------------*/
+
+void splitString(string s,vector<string> &v,string c){
+    int pos1,pos2;
+    pos2=s.find(c);
+    pos1=0;
+    while(string::npos!=pos2){
+        v.push_back(s.substr(pos1,pos2-pos1));
+        pos1=pos2+c.size();
+        pos2=s.find(c,pos1);
+    }
+    if(pos1!=s.length())
+        v.push_back(s.substr(pos1));
+}
 
 bool includeChinese(string str){
     char temp;
@@ -913,34 +1024,70 @@ int main(){
     GetLocalTime(&sysTime);
 
     vector<Student> all;
-    menu();
     int choice;
-    choice=getch();
-    choice-=48;
-    cout<<choice<<endl;
-    switch(choice){
-        case 1:
-            readIn();
-            break;
-        case 2:
-            search();
-            break;
-        case 3:
-            change();
-            break;
-        case 4:
-            deleteInfo();
-            break;
-        case 5:
-            analyze();
-            break;
-        case 6:
-            sort();
-            break;
-        case 7:
-            cout<<"谢谢使用。"<<endl;
-            goto end;
+    while(1){
+        menu();
+        choice=getch();
+        choice-=48;
+        cout<<choice<<endl;
+        switch(choice){
+            case 1:{
+                Student temp;
+                setNumber(temp);
+                setName(temp);
+                setSex(temp);
+                setCountry(temp);
+                setBirthday(temp);
+                setNation(temp);
+                setMarrige(temp);
+                setPoliticStatus(temp);
+                setIDNumber(temp);
+                setType(temp);
+                setEnrollmentDate(temp);
+                setEntranceWay(temp);
+                setMajor(temp);
+                setGrade(temp);
+                setSchoolLength(temp);
+                setTrainingLevel(temp);
+                setClass(temp);
+                setCounsellor(temp);
+                ofstream studentFile("student.txt");
+                studentFile<<temp.getNumber()<<' '<<temp.getName()<<' '<<temp.getSex()<<' '<<temp.getCountry()<<' '
+                           <<temp.getBirthday().getYear()<<'.'<<temp.getBirthday().getMonth()<<'.'
+                           <<temp.getBirthday().getDay()<<' '<<temp.getNation()<<' '<<temp.getMarrige()<<' '
+                           <<temp.getPoliticsStatus()<<' '<<temp.getIdNumber()<<' '<<temp.getType()<<' '
+                           <<temp.getEnrollmentDate().getYear()<<'.'<<temp.getEnrollmentDate().getMonth()
+                           <<'.'<<temp.getEnrollmentDate().getDay()<<' '<<temp.getEntranceWay()<<' '
+                           <<temp.getCollege()<<' '<<temp.getMajor()<<' '<<temp.getGrade()<<' '
+                           <<temp.getSchoolLength()<<' '<<temp.getTrainingLevel()
+                           <<' '<<temp.getClassNum()<<' '<<temp.getCounsellor()<<endl;
+                break;
+            }
+            case 2:
+                search();
+                break;
+            case 3:
+                change();
+                break;
+            case 4:
+                deleteInfo();
+                break;
+            case 5:
+                analyze();
+                break;
+            case 6:
+                sort();
+                break;
+            case 7:
+                print();
+                break;
+            case 8:
+                cout<<"谢谢使用。"<<endl;
+                goto end;
+            default:
+                cout<<"选择错误，请重新选择!"<<endl;
+                break;
+        }
     }
-    end:
-    return 0;
+    end:exit(1);
 }
