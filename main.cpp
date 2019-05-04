@@ -859,7 +859,7 @@ void setEntranceWay(Student &temp){
     entranceWayFile.seekg(0,ios::beg);
     while(!entranceWayFile.eof()){
         getline(entranceWayFile,entranceWayBuf);
-        cout<<entranceWayBuf;
+        cout<<left<<setw(15)<<entranceWayBuf;
     }
     cout<<endl<<"请选择入学方式：";
     cin.clear();
@@ -1077,7 +1077,6 @@ void search(){
         if(key==splits[searchChoice]){
             find=1;
             cout<<studentBuf<<endl;
-            break;
         }
         if(studentFile.eof()&&find==0){
             cout<<"无对应学生信息！"<<endl;
@@ -1375,15 +1374,28 @@ void sort(){
 
 void print(){
     string printBuf;
+    vector<string> splits;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cout<<"学生信息如下："<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     studentFile.clear();
     studentFile.seekg(0,ios::beg);
-    while(studentFile.eof()){
+    cout<<"------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+    cout<<"学号        姓名      性别  国籍        出生日期    婚姻状况    政治面貌               身份证号             类别    入学日期  入学方式  学院   专业   年级   学制   层次   班级   辅导员\n";
+    while(!studentFile.eof()){
         getline(studentFile,printBuf);
-        cout<<printBuf<<endl;
+        splits.clear();
+        splitString(printBuf,splits," ");
+        for(int i=0;i<splits.size();i++){
+            if(i==7||i==1||i==3||i==5){
+                cout<<left<<setw(10)<<splits[i]<<"  ";
+            }else{
+                cout<<splits[i]<<"  ";
+            }
+        }
+        cout<<endl;
     }
+    cout<<"------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
     cout<<"输出成功！"<<endl<<endl<<endl;
 }
 
@@ -1436,7 +1448,6 @@ bool isChoice(string choice){
 int main(){
     hOut=GetStdHandle(STD_OUTPUT_HANDLE);
     GetLocalTime(&sysTime);
-
     vector<Student> all;
     int choice;
     while(1){
@@ -1457,6 +1468,8 @@ int main(){
                     cin>>readChoice;
                 }
                 if(readChoice==1){
+                    studentFile.clear();
+                    studentFile.seekg(0,ios::end);
                     Student temp;
                     setNumber(temp);
                     setName(temp);
