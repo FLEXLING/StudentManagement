@@ -10,7 +10,7 @@
 
 using namespace std;
 
-//ÂÖ®Â±ÄÊñá‰ª∂ÊåáÈíàÂèòÈáè
+//»´æ÷Œƒº˛÷∏’Î±‰¡ø
 ifstream collegeFile("college.txt");
 ifstream countryFile("country.txt");
 ifstream nationFile("nation.txt");
@@ -22,10 +22,10 @@ ifstream majorFile("major.txt");
 ifstream counsellorFile("counsellor.txt");
 fstream studentFile("student.txt");
 
-//Ëé∑ÂèñÁ≥ªÁªüÊó∂Èó¥
+//ªÒ»°œµÕ≥ ±º‰
 SYSTEMTIME sysTime={0};
 
-//CMDÈ¢úËâ≤ÊéßÂà∂
+//CMD—’…´øÿ÷∆
 HANDLE hOut;
 
 bool includeChinese(string);
@@ -35,10 +35,10 @@ bool isChoice(string);
 int judge(int,int,int);
 
 int isRun(int);
-/*Â≠¶Âè∑„ÄÅÂßìÂêç„ÄÅÊÄßÂà´„ÄÅÂõΩÂà´„ÄÅÂá∫ÁîüÊó•Êúü„ÄÅÊ∞ëÊóè„ÄÅÂ©öÂßªÁä∂ÂÜµ„ÄÅÊîøÊ≤ªÈù¢Ë≤å„ÄÅË∫´‰ªΩËØÅÂè∑„ÄÅ
-  Â≠¶ÁîüÁ±ªÂà´„ÄÅÂÖ•Â≠¶Âπ¥Êúà„ÄÅÂÖ•Â≠¶ÊñπÂºè„ÄÅÂ≠¶Èô¢„ÄÅ‰∏ì‰∏ö„ÄÅÂ≠¶Âà∂„ÄÅÂüπÂÖªÂ±ÇÊ¨°„ÄÅÂπ¥Á∫ß„ÄÅÁè≠Á∫ßÂè∑„ÄÅËæÖÂØºÂëòÁ≠â*/
+/*—ß∫≈°¢–’√˚°¢–‘±°¢π˙±°¢≥ˆ…˙»’∆⁄°¢√Ò◊Â°¢ªÈ“ˆ◊¥øˆ°¢’˛÷Œ√Ê√≤°¢…Ì∑›÷§∫≈°¢
+  —ß…˙¿‡±°¢»Î—ßƒÍ‘¬°¢»Î—ß∑Ω Ω°¢—ß‘∫°¢◊®“µ°¢—ß÷∆°¢≈‡—¯≤„¥Œ°¢ƒÍº∂°¢∞‡º∂∫≈°¢∏®µº‘±µ»*/
 
-//DateÁ±ªÂºÄÂßã
+//Date¿‡ø™ º
 class Date{
 private:
     int year;
@@ -108,9 +108,9 @@ void Date::getDate(int &y,int &m,int &d){
     m=this->month;
     d=this->day;
 }
-//DateÁ±ªÁªìÊùü
+//Date¿‡Ω· ¯
 
-//StudentÁ±ªÂºÄÂßã
+//Student¿‡ø™ º
 class Student{
 public:
     string getNumber(){
@@ -282,9 +282,9 @@ private:
     int classNum;
     string counsellor;
 };
-//StudentÁ±ªÁªìÊùü
+//Student¿‡Ω· ¯
 
-//DateÁ±ªÂÖ≥ËÅîÂáΩÊï∞
+//Date¿‡πÿ¡™∫Ø ˝
 int judge(int y,int m,int d){
     int isRight=1;
     if(y>0&&m>0&&m<13&&d>0&&d<32){
@@ -314,35 +314,35 @@ int isRun(int year){
 
 void menu(){
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<" ______________Â≠¶Áîü‰ø°ÊÅØÁÆ°ÁêÜÁ≥ªÁªü_______________ "<<endl;
+    cout<<" ______________—ß…˙–≈œ¢π‹¿ÌœµÕ≥_______________ "<<endl;
     cout<<"|                                             |"<<endl;
-    cout<<"|  1.ÂΩïÂÖ•Â≠¶Áîü‰ø°ÊÅØ                             |"<<endl;
-    cout<<"|  2.Êü•ËØ¢Â≠¶Áîü‰ø°ÊÅØ                             |"<<endl;
-    cout<<"|  3.‰øÆÊîπÂ≠¶Áîü‰ø°ÊÅØ                             |"<<endl;
-    cout<<"|  4.Âà†Èô§Â≠¶Áîü‰ø°ÊÅØ                             |"<<endl;
-    cout<<"|  5.ÂàÜÊûêÂ≠¶Áîü‰ø°ÊÅØ                             |"<<endl;
-    cout<<"|  6.ÊéíÂ∫èÂ≠¶Áîü‰ø°ÊÅØ                             |"<<endl;
-    cout<<"|  7.ËæìÂá∫Â≠¶Áîü‰ø°ÊÅØ                             |"<<endl;
-    cout<<"|  8.ÈÄÄÂá∫                                     |"<<endl;
+    cout<<"|  1.¬º»Î—ß…˙–≈œ¢                             |"<<endl;
+    cout<<"|  2.≤È—Ø—ß…˙–≈œ¢                             |"<<endl;
+    cout<<"|  3.–ﬁ∏ƒ—ß…˙–≈œ¢                             |"<<endl;
+    cout<<"|  4.…æ≥˝—ß…˙–≈œ¢                             |"<<endl;
+    cout<<"|  5.∑÷Œˆ—ß…˙–≈œ¢                             |"<<endl;
+    cout<<"|  6.≈≈–Ú—ß…˙–≈œ¢                             |"<<endl;
+    cout<<"|  7. ‰≥ˆ—ß…˙–≈œ¢                             |"<<endl;
+    cout<<"|  8.ÕÀ≥ˆ                                     |"<<endl;
     cout<<"|_____________________________________________|"<<endl;
-    cout<<"ËØ∑ÈÄâÊã©Ôºö";
+    cout<<"«Î—°‘Ò£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
 }
 
 void setNumber(Student &temp){
-    //ËÆæÁΩÆÂ≠¶Âè∑
+    //…Ë÷√—ß∫≈
     string number;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•Â≠¶Âè∑(ÂøÖÈ°ª‰∏∫9‰Ωç)Ôºö";
+    cout<<"«Î ‰»Î—ß∫≈(±ÿ–ÎŒ™9Œª)£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>number;
     int numberRight=1;
     do{
         numberRight=1;
-        if(number.length()!=9){//Âà§Êñ≠Â≠¶Âè∑ÈïøÂ∫¶
+        if(number.length()!=9){//≈–∂œ—ß∫≈≥§∂»
             numberRight=0;
         }else{
-            string tempCollege=number.substr(0,2);//Âà§Êñ≠Â≠¶Èô¢ÊòØÂê¶Ê≠£Á°Æ
+            string tempCollege=number.substr(0,2);//≈–∂œ—ß‘∫ «∑Ò’˝»∑
             string buf;
             int is=0;
             collegeFile.clear();
@@ -358,7 +358,7 @@ void setNumber(Student &temp){
             if(is==0){
                 numberRight=0;
             }else{
-                //Âà§Êñ≠ÂÖ•Â≠¶Âπ¥‰ªΩÊòØÂê¶‰∏∫ÂΩìÂâçÂπ¥‰ªΩ
+                //≈–∂œ»Î—ßƒÍ∑› «∑ÒŒ™µ±«∞ƒÍ∑›
                 if((number[2]-48)!=(sysTime.wYear-2000)/10||(number[3]-48)!=(sysTime.wYear-2000)%10){
                     numberRight=0;
                 }
@@ -366,20 +366,20 @@ void setNumber(Student &temp){
         }
 
         if(numberRight==0){
-            cout<<"ËæìÂÖ•Â≠¶Âè∑ÊúâËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•Ôºö";
+            cout<<" ‰»Î—ß∫≈”–ŒÛ£¨«Î÷ÿ–¬ ‰»Î£∫";
             cin>>number;
         }
     }while(numberRight==0);
     temp.getEnrollmentDate().setYear(sysTime.wYear);
     temp.setNumber(number);
-    cout<<"Â≠¶Âè∑ÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"—ß∫≈¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setName(Student &temp){
-    //ËÆæÁΩÆÂßìÂêç
+    //…Ë÷√–’√˚
     string name;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•ÂßìÂêç(2-20‰∏™Ê±âÂ≠óÊàñ40‰∏™‰ª•ÂÜÖÂ≠óÊØç)Ôºö";
+    cout<<"«Î ‰»Î–’√˚(2-20∏ˆ∫∫◊÷ªÚ40∏ˆ“‘ƒ⁄◊÷ƒ∏)£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>name;
     bool nameRight=1;
@@ -387,30 +387,30 @@ void setName(Student &temp){
         if(includeChinese(name)){
             for(int i=0;i<name.length();i++){
                 if(isalpha(name[i])||ispunct(name[i])||isdigit(name[i])){
-                    cout<<"ÂßìÂêç‰∏≠‰∏çËÉΩÂêåÊó∂Âê´Êúâ‰∏≠ÊñáÂíåÂÖ∂‰ªñÂ≠óÁ¨¶ÔºÅ"<<endl;
+                    cout<<"–’√˚÷–≤ªƒ‹Õ¨ ±∫¨”–÷–Œƒ∫Õ∆‰À˚◊÷∑˚£°"<<endl;
                     nameRight=false;
                     break;
                 }
             }
             if(name.length()<4||name.length()>40){
                 nameRight=false;
-                cout<<"ÂßìÂêçÈïøÂ∫¶ÈîôËØØÔºÅ"<<endl;
+                cout<<"–’√˚≥§∂»¥ÌŒÛ£°"<<endl;
             }
         }else{
             for(int i=0;i<name.length();i++){
                 if(!isalpha(name[i])){
                     nameRight=false;
-                    cout<<"ÂßìÂêç‰∏≠‰∏çËÉΩÂê´ÊúâÈô§‰∏≠ÊñáÂíåÂ≠óÊØçÁöÑÂÖ∂‰ªñÂ≠óÁ¨¶ÔºÅ"<<endl;
+                    cout<<"–’√˚÷–≤ªƒ‹∫¨”–≥˝÷–Œƒ∫Õ◊÷ƒ∏µƒ∆‰À˚◊÷∑˚£°"<<endl;
                     break;
                 }
             }
             if(name.length()<=0||name.length()>40){
                 nameRight=false;
-                cout<<"ÂßìÂêçÈïøÂ∫¶ÈîôËØØÔºÅ"<<endl;
+                cout<<"–’√˚≥§∂»¥ÌŒÛ£°"<<endl;
             }
         }
         if(nameRight==false){
-            cout<<"ËØ∑ÈáçÊñ∞ËæìÂÖ•Ôºö";
+            cout<<"«Î÷ÿ–¬ ‰»Î£∫";
             cin>>name;
             nameRight=true;
         }else{
@@ -418,32 +418,32 @@ void setName(Student &temp){
             break;
         }
     }
-    cout<<"ÂßìÂêçÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"–’√˚¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setSex(Student &temp){
-    //ËÆæÁΩÆÊÄßÂà´
+    //…Ë÷√–‘±
     int sex;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ÈÄâÊã©ÊÄßÂà´(Áî∑/Â•≥)Ôºö"<<endl<<"1.Áî∑   2.Â•≥"<<endl;
+    cout<<"«Î—°‘Ò–‘±(ƒ–/≈Æ)£∫"<<endl<<"1.ƒ–   2.≈Æ"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>sex;
     while(sex<1||sex>2){
-        cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•Ôºö";
+        cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î£∫";
         cin>>sex;
     }
     if(sex==1){
-        temp.setSex("Áî∑");
+        temp.setSex("ƒ–");
     }else if(sex==2){
-        temp.setSex("Â•≥");
+        temp.setSex("≈Æ");
     }
-    cout<<"ÊÄßÂà´ÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"–‘±¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setCountry(Student &temp){
-    //ËÆæÁΩÆÂõΩÂà´
+    //…Ë÷√π˙±
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ÂõΩÁ±çÂΩïÂÖ•ÔºåÂèØÈÄâÊã©ÂõΩÁ±çÂ¶Ç‰∏ãÔºö"<<endl;
+    cout<<"π˙ºÆ¬º»Î£¨ø…—°‘Òπ˙ºÆ»Áœ¬£∫"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     string countryBuf;
     int item=0;
@@ -458,20 +458,20 @@ void setCountry(Student &temp){
             cout<<endl;
         }
     }
-    cout<<endl<<"ËØ∑ÈÄâÊã©ÂõΩÁ±çÔºö";
+    cout<<endl<<"«Î—°‘Òπ˙ºÆ£∫";
     cin.clear();
     cin.sync();
     getline(cin,countryChoice);
     if(countryChoice.size()==0){
-        temp.setCountry("‰∏≠ÂõΩ");
-        cout<<"Êó†ÊúâÊïàËæìÂÖ•ÔºåÂ∑≤Â∞ÜÂõΩÁ±çËÆæ‰∏∫ÈªòËÆ§ÂÄºÔºö‰∏≠ÂõΩ"<<endl;
+        temp.setCountry("÷–π˙");
+        cout<<"Œﬁ”––ß ‰»Î£¨“—Ω´π˙ºÆ…ËŒ™ƒ¨»œ÷µ£∫÷–π˙"<<endl;
     }else{
         countryFile.clear();
         countryFile.seekg(0,ios::beg);
         int countryNum;
         while(!countryFile.eof()){
             while(!isChoice(countryChoice)){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>countryChoice;
                 countryFile.clear();
                 countryFile.seekg(0,ios::beg);
@@ -479,52 +479,52 @@ void setCountry(Student &temp){
             getline(countryFile,countryBuf);
             countryNum=atoi(countryBuf.substr(0,3).c_str());
             if(atoi(countryChoice.c_str())==countryNum){
-                cout<<"Â∑≤ÈÄâÊã©Ôºö"<<countryBuf<<endl;
+                cout<<"“——°‘Ò£∫"<<countryBuf<<endl;
                 temp.setCountry(countryBuf.substr(8,countryBuf.length()));
                 break;
             }else if(countryFile.eof()&&atoi(countryChoice.c_str())!=countryNum){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>countryChoice;
                 countryFile.clear();
                 countryFile.seekg(0,ios::beg);
             }
         }
     }
-    cout<<"ÂõΩÁ±çÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"π˙ºÆ¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setBirthday(Student &temp){
-    //ËÆæÁΩÆÂá∫ÁîüÊó•Êúü
+    //…Ë÷√≥ˆ…˙»’∆⁄
     string birthday;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•Âá∫ÁîüÊó•ÊúüÔºö";
+    cout<<"«Î ‰»Î≥ˆ…˙»’∆⁄£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>birthday;
-    int birthY=atoi(birthday.substr(0,birthday.find_first_of('.')).c_str());//Âá∫ÁîüÊó•ÊúüÂàÜÂâ≤ÔºåÂπ∂Â∞ÜÂÖ∂ËΩ¨Âåñ‰∏∫int
+    int birthY=atoi(birthday.substr(0,birthday.find_first_of('.')).c_str());//≥ˆ…˙»’∆⁄∑÷∏Ó£¨≤¢Ω´∆‰◊™ªØŒ™int
     int birthM=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.find_last_of('.')).c_str());
     int birthD=atoi(birthday.substr(birthday.find_last_of('.')+1,birthday.length()).c_str());
     while(!(judge(birthY,birthM,birthD)&&(sysTime.wYear-birthY)>=10&&(sysTime.wYear-birthY)<=100)){
-        cout<<"Âá∫ÁîüÊó•ÊúüËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•Ôºö";
+        cout<<"≥ˆ…˙»’∆⁄ ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î£∫";
         cin>>birthday;
         birthY=atoi(birthday.substr(0,birthday.find_first_of('.')).c_str());
         birthM=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.find_last_of('.')).c_str());
         birthD=atoi(birthday.substr(birthday.find_first_of('.')+1,birthday.length()).c_str());
     }
     temp.getBirthday().setDate(birthY,birthM,birthD);
-    cout<<"Âá∫ÁîüÊó•ÊúüÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"≥ˆ…˙»’∆⁄¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setNation(Student &temp){
-    //ËÆæÁΩÆÊ∞ëÊóè
+    //…Ë÷√√Ò◊Â
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"Ê∞ëÊóèÂΩïÂÖ•ÔºåÂèØÈÄâÊã©Ê∞ëÊóèÂ¶Ç‰∏ãÔºö"<<endl;
+    cout<<"√Ò◊Â¬º»Î£¨ø…—°‘Ò√Ò◊Â»Áœ¬£∫"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     string nationBuf;
     int item=0;
     string nationChoice;
     nationFile.clear();
     nationFile.seekg(0,ios::beg);
-    while(!nationFile.eof()){//ÊåâÁÖß‰∏ÄË°åÂõõ‰∏™ËøõË°åËæìÂá∫
+    while(!nationFile.eof()){//∞¥’’“ª––Àƒ∏ˆΩ¯–– ‰≥ˆ
         getline(nationFile,nationBuf);
         cout<<left<<setw(30)<<nationBuf;
         item++;
@@ -532,20 +532,20 @@ void setNation(Student &temp){
             cout<<endl;
         }
     }
-    cout<<endl<<"ËØ∑ÈÄâÊã©Ê∞ëÊóèÔºö";
+    cout<<endl<<"«Î—°‘Ò√Ò◊Â£∫";
     cin.clear();
-    cin.sync();//Ê∏ÖÁ©∫cinÁºìÂÜ≤Âå∫
-    getline(cin,nationChoice);//ËØªÂÖ•ÈÄâÊã©
-    if(nationChoice.size()==0){//Êó†ÊúâÊïàËæìÂÖ•ÊÉÖÂÜµ
-        temp.setNation("Ê±âÊóè");
-        cout<<"Êó†ÊúâÊïàËæìÂÖ•ÔºåÂ∑≤Â∞ÜÊ∞ëÊóèËÆæ‰∏∫ÈªòËÆ§ÂÄºÔºöÊ±âÊóè"<<endl;
+    cin.sync();//«Âø’cinª∫≥Â«¯
+    getline(cin,nationChoice);//∂¡»Î—°‘Ò
+    if(nationChoice.size()==0){//Œﬁ”––ß ‰»Î«Èøˆ
+        temp.setNation("∫∫◊Â");
+        cout<<"Œﬁ”––ß ‰»Î£¨“—Ω´√Ò◊Â…ËŒ™ƒ¨»œ÷µ£∫∫∫◊Â"<<endl;
     }else{
         nationFile.clear();
         nationFile.seekg(0,ios::beg);
         int nationNum;
         while(!nationFile.eof()){
             while(!isChoice(nationChoice)){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>nationChoice;
                 nationFile.clear();
                 nationFile.seekg(0,ios::beg);
@@ -553,25 +553,25 @@ void setNation(Student &temp){
             getline(nationFile,nationBuf);
             nationNum=atoi(nationBuf.substr(0,nationBuf.find_first_of('\t')).c_str());
             if(atoi(nationChoice.c_str())==nationNum){
-                cout<<"Â∑≤ÈÄâÊã©Ôºö"<<nationBuf<<endl;
+                cout<<"“——°‘Ò£∫"<<nationBuf<<endl;
                 temp.setNation(nationBuf.substr(nationBuf.find_last_of('\t')+1,nationBuf.length()));
                 break;
             }else if(nationFile.eof()&&atoi(nationChoice.c_str())!=nationNum){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>nationChoice;
                 nationFile.clear();
                 nationFile.seekg(0,ios::beg);
             }
         }
     }
-    cout<<"Ê∞ëÊóèÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"√Ò◊Â¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setMarrige(Student &temp){
     string marrige;
-    //ËÆæÁΩÆÂ©öÂßªÁä∂ÂÜµ
+    //…Ë÷√ªÈ“ˆ◊¥øˆ
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ÈÄâÊã©Â©öÂßªÁä∂ÂÜµÔºö"<<endl<<"1.Êú™Â©ö   2.Â∑≤Â©ö    3.‰∏ßÂÅ∂    4.Á¶ªÂ©ö    9.ÂÖ∂‰ªñ"<<endl;
+    cout<<"«Î—°‘ÒªÈ“ˆ◊¥øˆ£∫"<<endl<<"1.Œ¥ªÈ   2.“—ªÈ    3.…•≈º    4.¿ÎªÈ    9.∆‰À˚"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin.clear();
     cin.sync();
@@ -579,37 +579,37 @@ void setMarrige(Student &temp){
     if(marrige.size()!=0){
         int int_marrige=atoi(marrige.c_str());
         while(int_marrige!=1&&int_marrige!=2&&int_marrige!=3&&int_marrige!=4&&int_marrige!=9){
-            cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•Ôºö";
+            cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î£∫";
             cin>>marrige;
             int_marrige=atoi(marrige.c_str());
         }
         if(int_marrige==1){
-            temp.setMarrige("Êú™Â©ö");
-            cout<<"Â∑≤ÈÄâÊã©ÔºöÊú™Â©ö"<<endl;
+            temp.setMarrige("Œ¥ªÈ");
+            cout<<"“——°‘Ò£∫Œ¥ªÈ"<<endl;
         }else if(int_marrige==2){
-            temp.setMarrige("Â∑≤Â©ö");
-            cout<<"Â∑≤ÈÄâÊã©ÔºöÂ∑≤Â©ö"<<endl;
+            temp.setMarrige("“—ªÈ");
+            cout<<"“——°‘Ò£∫“—ªÈ"<<endl;
         }else if(int_marrige==3){
-            temp.setMarrige("‰∏ßÂÅ∂");
-            cout<<"Â∑≤ÈÄâÊã©Ôºö‰∏ßÂÅ∂"<<endl;
+            temp.setMarrige("…•≈º");
+            cout<<"“——°‘Ò£∫…•≈º"<<endl;
         }else if(int_marrige==4){
-            temp.setMarrige("Á¶ªÂ©ö");
-            cout<<"Â∑≤ÈÄâÊã©ÔºöÁ¶ªÂ©ö"<<endl;
+            temp.setMarrige("¿ÎªÈ");
+            cout<<"“——°‘Ò£∫¿ÎªÈ"<<endl;
         }else if(int_marrige==9){
-            temp.setMarrige("ÂÖ∂‰ªñ");
-            cout<<"Â∑≤ÈÄâÊã©ÔºöÂÖ∂‰ªñ"<<endl;
+            temp.setMarrige("∆‰À˚");
+            cout<<"“——°‘Ò£∫∆‰À˚"<<endl;
         }
     }else{
-        temp.setMarrige("Êú™Â©ö");
-        cout<<"Êó†ÊúâÊïàËæìÂÖ•ÔºåÂ∑≤Â∞ÜÂ©öÂßªÁä∂ÂÜµËÆæ‰∏∫ÈªòËÆ§ÂÄºÔºöÊú™Â©ö"<<endl;
+        temp.setMarrige("Œ¥ªÈ");
+        cout<<"Œﬁ”––ß ‰»Î£¨“—Ω´ªÈ“ˆ◊¥øˆ…ËŒ™ƒ¨»œ÷µ£∫Œ¥ªÈ"<<endl;
     }
-    cout<<"Â©öÂßªÁä∂ÂÜµÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"ªÈ“ˆ◊¥øˆ¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setPoliticStatus(Student &temp){
-    //ËÆæÁΩÆÊîøÊ≤ªÈù¢Ë≤å
+    //…Ë÷√’˛÷Œ√Ê√≤
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ÊîøÊ≤ªÈù¢Ë≤åÔºåÂèØÈÄâÊã©ÊîøÊ≤ªÈù¢Ë≤åÂ¶Ç‰∏ãÔºö"<<endl;
+    cout<<"’˛÷Œ√Ê√≤£¨ø…—°‘Ò’˛÷Œ√Ê√≤»Áœ¬£∫"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     string politicsStatusBuf;
     int item=0;
@@ -624,29 +624,29 @@ void setPoliticStatus(Student &temp){
             cout<<endl;
         }
     }
-    cout<<endl<<"ËØ∑ÈÄâÊã©ÊîøÊ≤ªÈù¢Ë≤åÔºö";
+    cout<<endl<<"«Î—°‘Ò’˛÷Œ√Ê√≤£∫";
     cin.clear();
     cin.sync();
     getline(cin,politicsStatusChoice);
     if(politicsStatusChoice.size()==0){
-        temp.setPoliticsStatus("ÂÖ±ÈùíÂõ¢Âëò");
-        cout<<"Êó†ÊúâÊïàËæìÂÖ•ÔºåÂ∑≤Â∞ÜÊîøÊ≤ªÈù¢Ë≤åËÆæ‰∏∫ÈªòËÆ§ÂÄºÔºöÂÖ±ÈùíÂõ¢Âëò"<<endl;
+        temp.setPoliticsStatus("π≤«‡Õ≈‘±");
+        cout<<"Œﬁ”––ß ‰»Î£¨“—Ω´’˛÷Œ√Ê√≤…ËŒ™ƒ¨»œ÷µ£∫π≤«‡Õ≈‘±"<<endl;
     }else{
         politicsStatusFile.clear();
         politicsStatusFile.seekg(0,ios::beg);
         int politicsStatusNum;
         while(!politicsStatusFile.eof()){
             while(!isChoice(politicsStatusChoice)){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>politicsStatusChoice;
             }
             getline(politicsStatusFile,politicsStatusBuf);
             politicsStatusNum=((politicsStatusBuf[0]-48)*10+(politicsStatusBuf[1]-48));
             if(atoi(politicsStatusChoice.c_str())==politicsStatusNum){
-                cout<<"Â∑≤ÈÄâÊã©Ôºö"<<politicsStatusBuf<<endl;
+                cout<<"“——°‘Ò£∫"<<politicsStatusBuf<<endl;
                 break;
             }else if(politicsStatusFile.eof()&&atoi(politicsStatusChoice.c_str())!=politicsStatusNum){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>politicsStatusChoice;
                 politicsStatusFile.clear();
                 politicsStatusFile.seekg(0,ios::beg);
@@ -655,47 +655,47 @@ void setPoliticStatus(Student &temp){
         temp.setPoliticsStatus(
                 politicsStatusBuf.substr(politicsStatusBuf.find_last_of(' '),politicsStatusBuf.length()));
     }
-    cout<<"ÊîøÊ≤ªÈù¢Ë≤åÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"’˛÷Œ√Ê√≤¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setIDNumber(Student &temp){
-    //ËÆæÁΩÆË∫´‰ªΩËØÅÂè∑
+    //…Ë÷√…Ì∑›÷§∫≈
     string IDNumber;
-    if(temp.getCountry()!="‰∏≠ÂõΩ"){
+    if(temp.getCountry()!="÷–π˙"){
         SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-        cout<<"ÂõΩÁ±ç‰ø°ÊÅØ‰∏∫Èùû‰∏≠ÂõΩÔºåË∫´‰ªΩËØÅÂè∑ËÆæ‰∏∫Á©∫ÔºÅ"<<endl<<endl<<endl;
+        cout<<"π˙ºÆ–≈œ¢Œ™∑«÷–π˙£¨…Ì∑›÷§∫≈…ËŒ™ø’£°"<<endl<<endl<<endl;
         SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
         temp.setIdNumber("0");
     }else{
         while(1){
             int isIdNumberRight=1;
             SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-            cout<<"ËØ∑ËæìÂÖ•Ë∫´‰ªΩËØÅÂè∑Ôºö";
+            cout<<"«Î ‰»Î…Ì∑›÷§∫≈£∫";
             SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
             cin.clear();
             cin.sync();
             cin>>IDNumber;
 
-            //Âà§Êñ≠Ë∫´‰ªΩËØÅÂè∑Â≠óÁ¨¶
+            //≈–∂œ…Ì∑›÷§∫≈◊÷∑˚
             if(includeChinese(IDNumber)){
-                cout<<"Ë∫´‰ªΩËØÅÂè∑‰∏≠‰∏çËÉΩÂê´ÊúâÊ±âÂ≠óÔºÅ"<<endl;
+                cout<<"…Ì∑›÷§∫≈÷–≤ªƒ‹∫¨”–∫∫◊÷£°"<<endl;
                 isIdNumberRight=0;
             }
             for(int i=0;i<IDNumber.length();i++){
                 if(ispunct(IDNumber[i])||isalpha(IDNumber[i])){
-                    cout<<"Ë∫´‰ªΩËØÅÂè∑‰∏≠‰∏çËÉΩÂê´ÊúâÂ≠óÁ¨¶ÊàñÊï∞Â≠ó";
+                    cout<<"…Ì∑›÷§∫≈÷–≤ªƒ‹∫¨”–◊÷∑˚ªÚ ˝◊÷";
                     isIdNumberRight=0;
                     break;
                 }
             }
 
-            //Âà§Êñ≠Ë∫´‰ªΩËØÅÂè∑ÈïøÂ∫¶
+            //≈–∂œ…Ì∑›÷§∫≈≥§∂»
             if(IDNumber.length()!=18){
-                cout<<"Ë∫´‰ªΩËØÅÂè∑ÈïøÂ∫¶ÈîôËØØÔºå";
+                cout<<"…Ì∑›÷§∫≈≥§∂»¥ÌŒÛ£¨";
                 isIdNumberRight=0;
             }
 
-            //Âà§Êñ≠Ë°åÊîøÂå∫Âàí
+            //≈–∂œ––’˛«¯ªÆ
             if(isIdNumberRight==1){
                 string adminDivisionBuf;
                 int adminDivisionNum;
@@ -711,7 +711,7 @@ void setIDNumber(Student &temp){
                         adminDivisionFile.seekg(0,ios::beg);
                         break;
                     }else if(adminDivisionFile.eof()&&atoi(IDNumber.substr(0,6).c_str())!=adminDivisionNum){
-                        cout<<"Ë°åÊîøÂå∫ÂàíÈîôËØØÔºå";
+                        cout<<"––’˛«¯ªÆ¥ÌŒÛ£¨";
                         isIdNumberRight=0;
                         adminDivisionFile.clear();
                         adminDivisionFile.seekg(0,ios::beg);
@@ -719,23 +719,23 @@ void setIDNumber(Student &temp){
                 }
             }
 
-            //Âà§Êñ≠Âá∫ÁîüÊó•Êúü
+            //≈–∂œ≥ˆ…˙»’∆⁄
             if(isIdNumberRight==1){
-                int IdbirthY=atoi(IDNumber.substr(6,4).c_str());//ÊèêÂèñË∫´‰ªΩËØÅÂá∫ÁîüÊó•ÊúüÔºåÂπ∂Â∞ÜÂÖ∂ËΩ¨Âåñ‰∏∫int
+                int IdbirthY=atoi(IDNumber.substr(6,4).c_str());//Ã·»°…Ì∑›÷§≥ˆ…˙»’∆⁄£¨≤¢Ω´∆‰◊™ªØŒ™int
                 int IdbirthM=atoi(IDNumber.substr(10,2).c_str());
                 int IdbirthD=atoi(IDNumber.substr(12,2).c_str());
                 if(IdbirthY!=temp.getBirthday().getYear()||IdbirthM!=temp.getBirthday().getMonth()
                    ||IdbirthD!=temp.getBirthday().getDay()){
                     isIdNumberRight=0;
-                    cout<<"Âá∫ÁîüÊó•ÊúüÈîôËØØÔºå";
+                    cout<<"≥ˆ…˙»’∆⁄¥ÌŒÛ£¨";
                 }
             }
 
-            //Âà§Êñ≠È°∫Â∫èÁ†Å
+            //≈–∂œÀ≥–Ú¬Î
             int intSex;
-            if(temp.getSex()=="Áî∑"){
+            if(temp.getSex()=="ƒ–"){
                 intSex=1;
-            }else if(temp.getSex()=="Â•≥"){
+            }else if(temp.getSex()=="≈Æ"){
                 intSex=0;
             }
             if(isIdNumberRight==1){
@@ -744,11 +744,11 @@ void setIDNumber(Student &temp){
                     isIdNumberRight=1;
                 }else{
                     isIdNumberRight=0;
-                    cout<<"ÊÄßÂà´ÈîôËØØÔºå";
+                    cout<<"–‘±¥ÌŒÛ£¨";
                 }
             }
 
-            //Âà§Êñ≠Ê†°È™å‰Ωç
+            //≈–∂œ–£—ÈŒª
             if(isIdNumberRight==1){
                 char check[11]={'1','0','X','9','8','7','6','5','4','3','2'};
                 int sumNum=(IDNumber[0]-48)*7+(IDNumber[1]-48)*9+(IDNumber[2]-48)*10+(IDNumber[3]-48)*5+
@@ -759,24 +759,24 @@ void setIDNumber(Student &temp){
                 char checkNum=check[sumNum%11];
                 if(checkNum!=IDNumber[17]){
                     isIdNumberRight=0;
-                    cout<<"Ê£ÄÈ™å‰ΩçÈîôËØØÔºå";
+                    cout<<"ºÏ—ÈŒª¥ÌŒÛ£¨";
                 }
             }
             if(isIdNumberRight==1){
                 temp.setIdNumber(IDNumber);
-                cout<<"Ë∫´‰ªΩËØÅÂè∑ÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+                cout<<"…Ì∑›÷§∫≈¬º»Î≥…π¶£°"<<endl<<endl<<endl;
                 break;
             }
         }
 
-        //TODO Âà§Êñ≠ÊòØÂê¶ÈáçÂ§çË∫´‰ªΩËØÅÂè∑
+        //TODO ≈–∂œ «∑Ò÷ÿ∏¥…Ì∑›÷§∫≈
     }
 }
 
 void setType(Student &temp){
-    //ËÆæÁΩÆÂ≠¶ÁîüÁ±ªÂà´
+    //…Ë÷√—ß…˙¿‡±
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËÆæÁΩÆÂ≠¶ÁîüÁ±ªÂà´ÔºåÂèØÈÄâÊã©Á±ªÂà´Â¶Ç‰∏ãÔºö"<<endl;
+    cout<<"…Ë÷√—ß…˙¿‡±£¨ø…—°‘Ò¿‡±»Áœ¬£∫"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     string typeBuf;
     int item=0;
@@ -791,29 +791,29 @@ void setType(Student &temp){
             cout<<endl;
         }
     }
-    cout<<endl<<"ËØ∑ÈÄâÊã©Â≠¶ÁîüÁ±ªÂà´Ôºö";
+    cout<<endl<<"«Î—°‘Ò—ß…˙¿‡±£∫";
     cin.clear();
     cin.sync();
     getline(cin,typeChoice);
     if(typeChoice.size()==0){
-        temp.setType("Êó†");
-        cout<<"Êó†ÊúâÊïàËæìÂÖ•ÔºåÂ∑≤Â∞ÜÂ≠¶ÁîüÁ±ªÂà´ËÆæ‰∏∫ÈªòËÆ§ÂÄºÔºöÊó†"<<endl;
+        temp.setType("Œﬁ");
+        cout<<"Œﬁ”––ß ‰»Î£¨“—Ω´—ß…˙¿‡±…ËŒ™ƒ¨»œ÷µ£∫Œﬁ"<<endl;
     }else{
         typeFile.clear();
         typeFile.seekg(0,ios::beg);
         int typeNum;
         while(!typeFile.eof()){
             while(!isChoice(typeChoice)){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>typeChoice;
             }
             getline(typeFile,typeBuf);
             typeNum=(typeBuf[0]-48);
             if(atoi(typeChoice.c_str())==typeNum){
-                cout<<"Â∑≤ÈÄâÊã©Ôºö"<<typeBuf<<endl;
+                cout<<"“——°‘Ò£∫"<<typeBuf<<endl;
                 break;
             }else if(typeFile.eof()&&atoi(typeChoice.c_str())!=typeNum){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>typeChoice;
                 typeFile.clear();
                 typeFile.seekg(0,ios::beg);
@@ -821,22 +821,22 @@ void setType(Student &temp){
         }
         temp.setType(typeBuf.substr(typeBuf.find_last_of(' '),typeBuf.length()));
     }
-    cout<<"Â≠¶ÁîüÁ±ªÂà´ÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"—ß…˙¿‡±¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setEnrollmentDate(Student &temp){
-    //ËÆæÁΩÆÂÖ•Â≠¶Âπ¥Êúà
+    //…Ë÷√»Î—ßƒÍ‘¬
     string enrollmentDate;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•ÂÖ•Â≠¶Êó•ÊúüÔºö";
+    cout<<"«Î ‰»Î»Î—ß»’∆⁄£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>enrollmentDate;
-    int enrollY=atoi(enrollmentDate.substr(0,enrollmentDate.find_first_of('.')).c_str());//Âá∫ÁîüÊó•ÊúüÂàÜÂâ≤ÔºåÂπ∂Â∞ÜÂÖ∂ËΩ¨Âåñ‰∏∫int
+    int enrollY=atoi(enrollmentDate.substr(0,enrollmentDate.find_first_of('.')).c_str());//≥ˆ…˙»’∆⁄∑÷∏Ó£¨≤¢Ω´∆‰◊™ªØŒ™int
     int enrollM=atoi(
             enrollmentDate.substr(enrollmentDate.find_first_of('.')+1,enrollmentDate.find_last_of('.')).c_str());
     int enrollD=atoi(enrollmentDate.substr(enrollmentDate.find_first_of('.')+1,enrollmentDate.length()).c_str());
     while(!(judge(enrollY,enrollM,enrollD)&&enrollM>=8&&enrollM<=10)){
-        cout<<"ÂÖ•Â≠¶Êó•ÊúüËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•Ôºö";
+        cout<<"»Î—ß»’∆⁄ ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î£∫";
         cin>>enrollmentDate;
         enrollY=atoi(enrollmentDate.substr(0,enrollmentDate.find_first_of('.')).c_str());
         enrollM=atoi(
@@ -844,13 +844,13 @@ void setEnrollmentDate(Student &temp){
         enrollD=atoi(enrollmentDate.substr(enrollmentDate.find_last_of('.')+1,enrollmentDate.length()).c_str());
     }
     temp.getEnrollmentDate().setDate(enrollY,enrollM,enrollD);
-    cout<<"ÂÖ•Â≠¶Êó•ÊúüÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"»Î—ß»’∆⁄¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setEntranceWay(Student &temp){
-    //ËÆæÁΩÆÂÖ•Â≠¶ÊñπÂºè
+    //…Ë÷√»Î—ß∑Ω Ω
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËÆæÁΩÆÂÖ•Â≠¶ÊñπÂºèÔºåÂèØÈÄâÊã©ÊñπÂºèÂ¶Ç‰∏ãÔºö"<<endl;
+    cout<<"…Ë÷√»Î—ß∑Ω Ω£¨ø…—°‘Ò∑Ω Ω»Áœ¬£∫"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     string entranceWayBuf;
     int item=0;
@@ -861,29 +861,29 @@ void setEntranceWay(Student &temp){
         getline(entranceWayFile,entranceWayBuf);
         cout<<entranceWayBuf;
     }
-    cout<<endl<<"ËØ∑ÈÄâÊã©ÂÖ•Â≠¶ÊñπÂºèÔºö";
+    cout<<endl<<"«Î—°‘Ò»Î—ß∑Ω Ω£∫";
     cin.clear();
     cin.sync();
     getline(cin,entranceWayChoice);
     if(entranceWayChoice.size()==0){
-        temp.setEntranceWay("ÊôÆÈÄöÂÖ•Â≠¶");
-        cout<<"Êó†ÊúâÊïàËæìÂÖ•ÔºåÂ∑≤Â∞ÜÂÖ•Â≠¶ÊñπÂºèËÆæ‰∏∫ÈªòËÆ§ÂÄºÔºöÊôÆÈÄöÂÖ•Â≠¶"<<endl;
+        temp.setEntranceWay("∆’Õ®»Î—ß");
+        cout<<"Œﬁ”––ß ‰»Î£¨“—Ω´»Î—ß∑Ω Ω…ËŒ™ƒ¨»œ÷µ£∫∆’Õ®»Î—ß"<<endl;
     }else{
         entranceWayFile.clear();
         entranceWayFile.seekg(0,ios::beg);
         int entranceWayNum;
         while(!entranceWayFile.eof()){
             while(!isChoice(entranceWayChoice)){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>entranceWayChoice;
             }
             getline(entranceWayFile,entranceWayBuf);
             entranceWayNum=(entranceWayBuf[0]-48);
             if(atoi(entranceWayChoice.c_str())==entranceWayNum){
-                cout<<"Â∑≤ÈÄâÊã©Ôºö"<<entranceWayBuf<<endl;
+                cout<<"“——°‘Ò£∫"<<entranceWayBuf<<endl;
                 break;
             }else if(entranceWayFile.eof()&&atoi(entranceWayChoice.c_str())!=entranceWayNum){
-                cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                 cin>>entranceWayChoice;
                 entranceWayFile.clear();
                 entranceWayFile.seekg(0,ios::beg);
@@ -891,14 +891,14 @@ void setEntranceWay(Student &temp){
         }
         temp.setEntranceWay(entranceWayBuf.substr(entranceWayBuf.find_last_of(' '),entranceWayBuf.length()));
     }
-    cout<<"ÂÖ•Â≠¶ÊñπÂºèÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"»Î—ß∑Ω Ω¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setMajor(Student &temp){
-    //ËÆæÁΩÆ‰∏ì‰∏öÂêçÁß∞
+    //…Ë÷√◊®“µ√˚≥∆
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËÆæÁΩÆ‰∏ì‰∏öÔºå‰Ω†ÁöÑÂ≠¶Èô¢‰∏∫Ôºö"<<temp.getCollege()<<endl;
-    cout<<"ÂèØÈÄâÊã©‰∏ì‰∏öÂ¶Ç‰∏ãÔºö"<<endl;
+    cout<<"…Ë÷√◊®“µ£¨ƒ„µƒ—ß‘∫Œ™£∫"<<temp.getCollege()<<endl;
+    cout<<"ø…—°‘Ò◊®“µ»Áœ¬£∫"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     string majorBuf;
     string majorCollege;
@@ -912,7 +912,7 @@ void setMajor(Student &temp){
         }
     }
 
-    cout<<endl<<"ËØ∑ÈÄâÊã©Ôºö";
+    cout<<endl<<"«Î—°‘Ò£∫";
     cin>>majorChoice;
     majorFile.clear();
     majorFile.seekg(0,ios::beg);
@@ -929,44 +929,44 @@ void setMajor(Student &temp){
     while(1){
         majorNum=majors[i];
         if(majorChoice==atoi(majorNum.substr(0,2).c_str())){
-            cout<<"Â∑≤ÈÄâÊã©Ôºö"<<majorNum<<endl;
+            cout<<"“——°‘Ò£∫"<<majorNum<<endl;
             goto here;
         }else if(i==majors.size()-1&&majorChoice!=atoi(majorNum.substr(0,1).c_str())){
-            cout<<"ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+            cout<<" ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
             cin>>majorChoice;
             i=-1;
         }
         i++;
     }
     here:temp.setMajor(majorNum.substr(2,majorNum.length()));
-    cout<<"‰∏ì‰∏öÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"◊®“µ¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setGrade(Student &temp){
-    //ËÆæÁΩÆÂπ¥Á∫ß
+    //…Ë÷√ƒÍº∂
     int grade;SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËÆæÁΩÆÂπ¥Á∫ßÔºåËØ∑ËæìÂÖ•ÊâÄÂú®Âπ¥Á∫ßÔºö";
+    cout<<"…Ë÷√ƒÍº∂£¨«Î ‰»ÎÀ˘‘⁄ƒÍº∂£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>grade;
     int numberYear=atoi(temp.getNumber().substr(2,2).c_str());
     if(grade!=2000+atoi(temp.getNumber().substr(2,2).c_str())){
         int tempChoice;
-        cout<<"ËæìÂÖ•Âπ¥Á∫ß‰∏éÂ≠¶Âè∑‰∏≠Âπ¥Á∫ß‰∏çÂêåÔºåÊòØÂê¶Á°ÆÂÆöÂΩïÂÖ•Ôºö1.ÊòØ      2.Âê¶"<<endl;
+        cout<<" ‰»ÎƒÍº∂”Î—ß∫≈÷–ƒÍº∂≤ªÕ¨£¨ «∑Ò»∑∂®¬º»Î£∫1. «      2.∑Ò"<<endl;
         cin>>tempChoice;
         if(tempChoice==1){
             temp.setGrade(grade);
         }else{
             temp.setGrade(2000+atoi(temp.getNumber().substr(2,2).c_str()));
-            cout<<"Â∑≤ÈÄâÊã©ÂΩïÂÖ•Â≠¶Âè∑‰∏≠Âπ¥‰ªΩ!"<<endl;
+            cout<<"“——°‘Ò¬º»Î—ß∫≈÷–ƒÍ∑›!"<<endl;
         }
     }else{
         temp.setGrade(2000+atoi(temp.getNumber().substr(2,2).c_str()));
     }
-    cout<<"Âπ¥Á∫ßÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"ƒÍº∂¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setSchoolLength(Student &temp){
-    //ËÆæÁΩÆÂ≠¶Âà∂
+    //…Ë÷√—ß÷∆
     if(atoi(temp.getNumber().substr(0,2).c_str())==15){
         temp.setSchoolLength(5);
     }else if(atoi(temp.getNumber().substr(0,2).c_str())==29){
@@ -975,44 +975,44 @@ void setSchoolLength(Student &temp){
         temp.setSchoolLength(4);
     }
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"Ê†πÊçÆ‰∏ì‰∏öÔºåÂ≠¶Âà∂Â∑≤ËÆæÁΩÆ‰∏∫Ôºö"<<temp.getSchoolLength()<<endl<<endl<<endl;
+    cout<<"∏˘æ›◊®“µ£¨—ß÷∆“—…Ë÷√Œ™£∫"<<temp.getSchoolLength()<<endl<<endl<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
 }
 
 void setTrainingLevel(Student &temp){
-    //ËÆæÁΩÆÂüπÂÖªÂ±ÇÊ¨°
+    //…Ë÷√≈‡—¯≤„¥Œ
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    if(temp.getMajor()=="Á†îÁ©∂Áîü‰∏ì‰∏ö"){
-        temp.setTrainingLevel("Á†îÁ©∂Áîü");
-        cout<<endl<<"‰∏ì‰∏ö‰∏∫Á†îÁ©∂Áîü‰∏ì‰∏ö\nÂΩïÂÖ•ÂüπÂÖªÂ±ÇÊ¨°ÔºöÁ†îÁ©∂Áîü"<<endl<<endl<<endl;
+    if(temp.getMajor()=="—–æø…˙◊®“µ"){
+        temp.setTrainingLevel("—–æø…˙");
+        cout<<endl<<"◊®“µŒ™—–æø…˙◊®“µ\n¬º»Î≈‡—¯≤„¥Œ£∫—–æø…˙"<<endl<<endl<<endl;
     }else{
-        temp.setTrainingLevel("Êú¨ÁßëÁîü");
-        cout<<endl<<"‰∏ì‰∏ö‰∏∫Êú¨Áßë‰∏ì‰∏ö\nÂΩïÂÖ•ÂüπÂÖªÂ±ÇÊ¨°ÔºöÊú¨ÁßëÁîü"<<endl<<endl<<endl;
+        temp.setTrainingLevel("±æø∆…˙");
+        cout<<endl<<"◊®“µŒ™±æø∆◊®“µ\n¬º»Î≈‡—¯≤„¥Œ£∫±æø∆…˙"<<endl<<endl<<endl;
         SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     }
 }
 
 void setClass(Student &temp){
-    //ËÆæÁΩÆÁè≠Á∫ßÂè∑
+    //…Ë÷√∞‡º∂∫≈
     string classNum;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËÆæÁΩÆÁè≠Á∫ßÂè∑ÔºåËØ∑ËæìÂÖ•ÊâÄÂú®Áè≠Á∫ßÔºö";
+    cout<<"…Ë÷√∞‡º∂∫≈£¨«Î ‰»ÎÀ˘‘⁄∞‡º∂£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>classNum;
     int intClassNum=atoi(classNum.c_str());
     while(intClassNum<0||intClassNum>10){
-        cout<<"Áè≠Á∫ßÂè∑ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•:";
+        cout<<"∞‡º∂∫≈ ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î:";
         cin>>classNum;
         intClassNum=atoi(classNum.c_str());
     }
     temp.setClassNum(intClassNum);
-    cout<<"Áè≠Á∫ß‰∏∫Ôºö"<<intClassNum<<"Áè≠ÔºåÁè≠Á∫ßÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"∞‡º∂Œ™£∫"<<intClassNum<<"∞‡£¨∞‡º∂¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void setCounsellor(Student &temp){
-    //ËÆæÁΩÆËæÖÂØºÂëò
+    //…Ë÷√∏®µº‘±
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ÂΩïÂÖ•ËæÖÂØºÂëòÔºö"<<endl;
+    cout<<"¬º»Î∏®µº‘±£∫"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     string major=temp.getMajor();
     string counsellorBuf;
@@ -1027,7 +1027,7 @@ void setCounsellor(Student &temp){
             temp.setCounsellor(counsellor);
             exist=1;
             SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-            cout<<"‰Ω†ÁöÑ‰∏ì‰∏ö‰∏∫Ôºö"<<major<<endl<<"ÂØπÂ∫îËæÖÂØºÂëò‰∏∫Ôºö"<<counsellor<<endl;
+            cout<<"ƒ„µƒ◊®“µŒ™£∫"<<major<<endl<<"∂‘”¶∏®µº‘±Œ™£∫"<<counsellor<<endl;
             SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
             break;
         }
@@ -1039,7 +1039,7 @@ void setCounsellor(Student &temp){
         temp.setCounsellor(counsellor);
         inCounsellorFile.close();
     }
-    cout<<"ËæÖÂØºÂëòÂΩïÂÖ•ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"∏®µº‘±¬º»Î≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void search(){
@@ -1048,10 +1048,10 @@ void search(){
     vector<string> splits;
     int find=0;
     int searchChoice;SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ÂèØÊü•ÊâæÁöÑÂ≠¶Áîü‰ø°ÊÅØÔºö1.Â≠¶Âè∑    2.ÂßìÂêç    3.Ê∞ëÊóè    4.Ë∫´‰ªΩËØÅÂè∑\n"
-          "                  5.Â≠¶Èô¢    6.‰∏ì‰∏ö"<<endl;
+    cout<<"ø…≤È’“µƒ—ß…˙–≈œ¢£∫1.—ß∫≈    2.–’√˚    3.√Ò◊Â    4.…Ì∑›÷§∫≈\n"
+          "                  5.—ß‘∫    6.◊®“µ"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•ÈÄâÊã©Ôºö";
+    cout<<"«Î ‰»Î—°‘Ò£∫";
     cin>>searchChoice;
     if(searchChoice==1){
         searchChoice=0;
@@ -1066,9 +1066,9 @@ void search(){
     }else if(searchChoice==6){
         searchChoice=13;
     }
-    cout<<"ËØ∑ËæìÂÖ•Êü•ÊâæÂ≠óÊÆµÔºö";
+    cout<<"«Î ‰»Î≤È’“◊÷∂Œ£∫";
     cin>>key;
-    cout<<endl<<endl<<"Êü•ÊâæÁªìÊûúÂ¶Ç‰∏ãÔºö"<<endl;
+    cout<<endl<<endl<<"≤È’“Ω·π˚»Áœ¬£∫"<<endl;
     studentFile.clear();
     studentFile.seekg(ios::beg);
     while(!studentFile.eof()){
@@ -1080,7 +1080,7 @@ void search(){
             break;
         }
         if(studentFile.eof()&&find==0){
-            cout<<"Êó†ÂØπÂ∫îÂ≠¶Áîü‰ø°ÊÅØÔºÅ"<<endl;
+            cout<<"Œﬁ∂‘”¶—ß…˙–≈œ¢£°"<<endl;
         }
     }
 }
@@ -1095,7 +1095,7 @@ void change(){
     vector<string> splits;
     int find=0;
     int findStu=0;SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•ÊÇ®Ë¶Å‰øÆÊîπÁöÑÂ≠¶ÁîüÂ≠¶Âè∑Ôºö";
+    cout<<"«Î ‰»Îƒ˙“™–ﬁ∏ƒµƒ—ß…˙—ß∫≈£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>changeNum;
     studentFile.clear();
@@ -1106,16 +1106,16 @@ void change(){
         if(studentBuf.substr(0,9)==changeNum){
             find=1;
             findStu=1;
-            cout<<"Êü•ÊâæÂà∞‰ø°ÊÅØÂ¶Ç‰∏ãÔºö"<<endl;
+            cout<<"≤È’“µΩ–≈œ¢»Áœ¬£∫"<<endl;
             cout<<studentBuf<<endl;
             break;
         }
         else{
             changeFile<<studentBuf;
-            //TODO debugÊòØÂê¶ÊúâÁ©∫Ë°å
+            //TODO debug «∑Ò”–ø’––
         }
         if(studentFile.eof()&&find==0){
-            cout<<"Êó†ÂØπÂ∫îÂ≠¶Áîü‰ø°ÊÅØÔºÅ"<<endl;
+            cout<<"Œﬁ∂‘”¶—ß…˙–≈œ¢£°"<<endl;
             findStu=0;
         }
     }
@@ -1143,12 +1143,12 @@ void change(){
         temp.setTrainingLevel(splits[16]);
         temp.setClassNum(atoi(splits[17].c_str()));
         temp.setCounsellor(splits[18]);
-        cout<<"ÂèØÈÄâ‰øÆÊîπÈ°πÔºö1.ÂßìÂêç      2.Ê∞ëÊóè      3.Â©öÂßªÁä∂ÂÜµ      4.ÊîøÊ≤ªÈù¢Ë≤å\n"
-              "            5.Â≠¶ÁîüÁ±ªÂûã  6.ÂÖ•Â≠¶ÊñπÂºè  7.Âπ¥Á∫ß          8.Áè≠Á∫ß\n"
-              "ËØ∑ËæìÂÖ•ÈÄâÊã©Ôºö";
+        cout<<"ø…—°–ﬁ∏ƒœÓ£∫1.–’√˚      2.√Ò◊Â      3.ªÈ“ˆ◊¥øˆ      4.’˛÷Œ√Ê√≤\n"
+              "            5.—ß…˙¿‡–Õ  6.»Î—ß∑Ω Ω  7.ƒÍº∂          8.∞‡º∂\n"
+              "«Î ‰»Î—°‘Ò£∫";
         cin>>changeChoice;
         while(changeChoice<1||changeChoice>8){
-            cout<<"ÈÄâÊã©ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•Ôºö";
+            cout<<"—°‘Ò¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î£∫";
             cin>>changeChoice;
         }
         string changeItem;
@@ -1195,7 +1195,7 @@ void change(){
             getline(changeFile,tempBuf);
             studentFile<<tempBuf;
         }
-        cout<<"‰øÆÊîπÂ≠¶Áîü‰ø°ÊÅØÂπ∂‰øùÂ≠òÊàêÂäüÔºÅ"<<endl<<endl;
+        cout<<"–ﬁ∏ƒ—ß…˙–≈œ¢≤¢±£¥Ê≥…π¶£°"<<endl<<endl;
     }
 }
 
@@ -1205,7 +1205,7 @@ void deleteInfo(){
     string studentBuf;
     int find=0;
     int findStu=0;SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•ÊÇ®Ë¶ÅÁöÑÂ≠¶ÁîüÂ≠¶Âè∑Ôºö";
+    cout<<"«Î ‰»Îƒ˙“™µƒ—ß…˙—ß∫≈£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>deleteNum;
     studentFile.clear();
@@ -1215,22 +1215,22 @@ void deleteInfo(){
         if(studentBuf.substr(0,9)==deleteNum){
             find=1;
             findStu=1;
-            cout<<"Êü•ÊâæÂà∞‰ø°ÊÅØÂ¶Ç‰∏ãÔºö"<<endl;
+            cout<<"≤È’“µΩ–≈œ¢»Áœ¬£∫"<<endl;
             cout<<studentBuf<<endl;
             break;
         }
         else{
             deleteFile<<studentBuf;
-            //TODO debugÊòØÂê¶ÊúâÁ©∫Ë°å
+            //TODO debug «∑Ò”–ø’––
         }
         if(studentFile.eof()&&find==0){
-            cout<<"Êó†ÂØπÂ∫îÂ≠¶Áîü‰ø°ÊÅØÔºÅ"<<endl;
+            cout<<"Œﬁ∂‘”¶—ß…˙–≈œ¢£°"<<endl;
             findStu=0;
         }
     }
     if(findStu){
         char deleteChoice;
-        cout<<"ÊòØÂê¶Ë¶ÅÂà†Èô§Â≠¶Áîü‰ø°ÊÅØ(yÁ°ÆËÆ§ÔºåÂÖ∂‰ªñÈîÆÂèñÊ∂à)Ôºö";
+        cout<<" «∑Ò“™…æ≥˝—ß…˙–≈œ¢(y»∑»œ£¨∆‰À˚º¸»°œ˚)£∫";
         cin>>deleteChoice;
         if(isupper(deleteChoice)){
             tolower(deleteChoice);
@@ -1244,12 +1244,12 @@ void deleteInfo(){
                 getline(deleteFile,tempBuf);
                 studentFile<<tempBuf;
             }
-            cout<<"Âà†Èô§Â≠¶Áîü‰ø°ÊÅØÂπ∂‰øùÂ≠òÊàêÂäüÔºÅ"<<endl<<endl;
+            cout<<"…æ≥˝—ß…˙–≈œ¢≤¢±£¥Ê≥…π¶£°"<<endl<<endl;
         }else{
-            cout<<"Â∑≤ÂèñÊ∂àÔºåËøîÂõû‰∏ªËèúÂçïÔºÅ"<<endl<<endl;
+            cout<<"“—»°œ˚£¨∑µªÿ÷˜≤Àµ•£°"<<endl<<endl;
         }
     }else{
-        cout<<"Êú™ÊâæÂà∞ÔºåËøîÂõû‰∏ªËèúÂçïÔºÅ"<<endl<<endl;
+        cout<<"Œ¥’“µΩ£¨∑µªÿ÷˜≤Àµ•£°"<<endl<<endl;
     }
 }
 
@@ -1261,10 +1261,10 @@ void analyze(){
     int itemNum=0;
     int searchChoice;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•ÊÇ®Ë¶ÅÊü•ÊâæÁöÑÂ≠¶Áîü‰ø°ÊÅØÔºö1.Â≠¶Âè∑    2.ÂßìÂêç    3.Ê∞ëÊóè    4.Ë∫´‰ªΩËØÅÂè∑\n"
-          "                          5.Â≠¶Èô¢    6.‰∏ì‰∏ö"<<endl;
+    cout<<"«Î ‰»Îƒ˙“™≤È’“µƒ—ß…˙–≈œ¢£∫1.—ß∫≈    2.–’√˚    3.√Ò◊Â    4.…Ì∑›÷§∫≈\n"
+          "                          5.—ß‘∫    6.◊®“µ"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ËØ∑ËæìÂÖ•ÈÄâÊã©Ôºö";
+    cout<<"«Î ‰»Î—°‘Ò£∫";
     cin>>searchChoice;
     if(searchChoice==1){
         searchChoice=0;
@@ -1279,9 +1279,9 @@ void analyze(){
     }else if(searchChoice==6){
         searchChoice=13;
     }
-    cout<<"ËØ∑ËæìÂÖ•Êü•ÊâæÂ≠óÊÆµÔºö";
+    cout<<"«Î ‰»Î≤È’“◊÷∂Œ£∫";
     cin>>key;
-    cout<<endl<<endl<<"Êü•ÊâæÁªìÊûúÂ¶Ç‰∏ãÔºö"<<endl;
+    cout<<endl<<endl<<"≤È’“Ω·π˚»Áœ¬£∫"<<endl;
     studentFile.clear();
     studentFile.seekg(ios::beg);
     while(!studentFile.eof()){
@@ -1294,7 +1294,7 @@ void analyze(){
             break;
         }
         if(studentFile.eof()&&find==0){
-            cout<<"Êó†ÂØπÂ∫îÂ≠¶Áîü‰ø°ÊÅØÔºÅ"<<endl;
+            cout<<"Œﬁ∂‘”¶—ß…˙–≈œ¢£°"<<endl;
         }
     }
 
@@ -1344,12 +1344,12 @@ void sort(){
     }
     ofstream studentFile("student.txt",ios::trunc);
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"ÊéíÂ∫èÊñπÂºèÔºö  1.Â≠¶Âè∑    2.Âπ¥Á∫ß\n"
-          "ËØ∑ÈÄâÊã©Ôºö";
+    cout<<"≈≈–Ú∑Ω Ω£∫  1.—ß∫≈    2.ƒÍº∂\n"
+          "«Î—°‘Ò£∫";
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     cin>>sortChoice;
     while(sortChoice<1||sortChoice>2){
-        cout<<"ÈÄâÊã©ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+        cout<<"—°‘Ò¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
         cin>>sortChoice;
     }
     if(sortChoice==1){
@@ -1370,13 +1370,13 @@ void sort(){
                   <<' '<<students[i].getClassNum()<<' '<<students[i].getCounsellor()<<endl;
     }
 
-    cout<<"ÊéíÂ∫èÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<"≈≈–Ú≥…π¶£°"<<endl<<endl<<endl;
 }
 
 void print(){
     string printBuf;
     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-    cout<<"Â≠¶Áîü‰ø°ÊÅØÂ¶Ç‰∏ãÔºö"<<endl;
+    cout<<"—ß…˙–≈œ¢»Áœ¬£∫"<<endl;
     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
     studentFile.clear();
     studentFile.seekg(0,ios::beg);
@@ -1384,10 +1384,10 @@ void print(){
         getline(studentFile,printBuf);
         cout<<printBuf<<endl;
     }
-    cout<<"ËæìÂá∫ÊàêÂäüÔºÅ"<<endl<<endl<<endl;
+    cout<<" ‰≥ˆ≥…π¶£°"<<endl<<endl<<endl;
 }
 
-/*------------------StudentÊàêÂëòÂáΩÊï∞ÁªìÊùü----------------------*/
+/*------------------Student≥…‘±∫Ø ˝Ω· ¯----------------------*/
 
 void splitString(string s,vector<string> &v,string c){
     int pos1,pos2;
@@ -1410,7 +1410,7 @@ bool includeChinese(string str){
     for(int i=0;i<str.length();i++){
         temp=str[i];
         tempNext=str[i+1];
-        if(temp&0x80||tempNext&0x80){//Â¶ÇÊûúÂ≠óÁ¨¶È´ò‰Ωç‰∏∫1‰∏î‰∏ã‰∏ÄÂ≠óÁ¨¶È´ò‰Ωç‰πüÊòØ1ÂàôÊúâ‰∏≠ÊñáÂ≠óÁ¨¶
+        if(temp&0x80||tempNext&0x80){//»Áπ˚◊÷∑˚∏ﬂŒªŒ™1«“œ¬“ª◊÷∑˚∏ﬂŒª“≤ «1‘Ú”–÷–Œƒ◊÷∑˚
             return true;
         }
     }
@@ -1448,12 +1448,12 @@ int main(){
             case 1:{
                 int readChoice;
                 SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-                cout<<"ËæìÂÖ•ÊñπÂºèÔºö  1.ÈîÆÁõòËæìÂÖ•    2.Êñá‰ª∂ËæìÂÖ•\n"
-                      "ËØ∑ÈÄâÊã©Ôºö";
+                cout<<" ‰»Î∑Ω Ω£∫  1.º¸≈Ã ‰»Î    2.Œƒº˛ ‰»Î\n"
+                      "«Î—°‘Ò£∫";
                 SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
                 cin>>readChoice;
                 while(readChoice<1||readChoice>2){
-                    cout<<"ÈÄâÊã©ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©Ôºö";
+                    cout<<"—°‘Ò¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò£∫";
                     cin>>readChoice;
                 }
                 if(readChoice==1){
@@ -1487,7 +1487,7 @@ int main(){
                                <<' '<<temp.getClassNum()<<' '<<temp.getCounsellor()<<endl;
                 }else if(readChoice==2){
                     SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-                    cout<<"Êñá‰ª∂ËØªÂÖ•‰ø°ÊÅØÈúÄÊîæÂÖ•fileReadIn.txt‰∏≠ÔºåÊåâËØªÂèñÈ°∫Â∫èÊîæÂÖ•ÔºåÁ©∫Ê†ºÈöîÂºÄÊØè‰∏™Â≠óÊÆµ"<<endl;
+                    cout<<"Œƒº˛∂¡»Î–≈œ¢–Ë∑≈»ÎfileReadIn.txt÷–£¨∞¥∂¡»°À≥–Ú∑≈»Î£¨ø’∏Ò∏Ùø™√ø∏ˆ◊÷∂Œ"<<endl;
                     SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
 
                 }
@@ -1513,12 +1513,12 @@ int main(){
                 break;
             case 8:
                 SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-                cout<<"Ë∞¢Ë∞¢‰ΩøÁî®„ÄÇ"<<endl;
+                cout<<"–ª–ª π”√°£"<<endl;
                 SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
                 goto end;
             default:
                 SetConsoleTextAttribute(hOut,FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-                cout<<"ÈÄâÊã©ÈîôËØØÔºåËØ∑ÈáçÊñ∞ÈÄâÊã©!"<<endl;
+                cout<<"—°‘Ò¥ÌŒÛ£¨«Î÷ÿ–¬—°‘Ò!"<<endl;
                 SetConsoleTextAttribute(hOut,FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
                 break;
         }
