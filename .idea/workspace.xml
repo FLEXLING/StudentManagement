@@ -12,7 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7947d3ed-315e-4eff-a838-435aeb98bec1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progress/1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progress/2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progress/count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/student.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/student.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +34,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="1475" column="43" lean-forward="true" selection-start-line="1475" selection-start-column="43" selection-end-line="1475" selection-end-column="43" />
+            <state relative-caret-position="146">
+              <caret line="1446" column="23" lean-forward="true" selection-start-line="1446" selection-start-column="23" selection-end-line="1446" selection-end-column="23" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -95,17 +99,16 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="291" />
-    <option name="y" value="73" />
-    <option name="width" value="1939" />
-    <option name="height" value="1052" />
+    <option name="x" value="290" />
+    <option name="y" value="72" />
+    <option name="width" value="1940" />
+    <option name="height" value="1053" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -122,6 +125,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -135,7 +139,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -190,22 +194,24 @@
       <workItem from="1556147879197" duration="2566000" />
       <workItem from="1556258223146" duration="7751000" />
       <workItem from="1556844981071" duration="35487000" />
+      <workItem from="1556949222719" duration="204000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161357000" />
+    <option name="totallyTimeSpent" value="161561000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1723" height="935" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17957959" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18138137" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32917705" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.329303" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4948949" weight="0.3990025" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4948949" visible="true" weight="0.3990025" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -285,8 +291,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="1475" column="43" lean-forward="true" selection-start-line="1475" selection-start-column="43" selection-end-line="1475" selection-end-column="43" />
+        <state relative-caret-position="146">
+          <caret line="1446" column="23" lean-forward="true" selection-start-line="1446" selection-start-column="23" selection-end-line="1446" selection-end-column="23" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
